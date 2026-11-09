@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Figurative Language Quest</title>
+<meta name="description" content="Grade 6 extended tutorial on figurative language, tone, and meaning">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#16244f; --navy2:#22357a; --gold:#f5b70a; --gold2:#ffd75e;
+  --ink:#1d2340; --muted:#5b6386; --bg:#f4f1ff; --card:#ffffff; --line:#e3e1f2;
+  --good:#16a34a; --goodbg:#e7f9ee; --bad:#dc2626; --badbg:#fdecec; --warn:#b45309; --warnbg:#fff4dc;
+  --accent:#7b3fe4; --accent2:#ff5fa2; --accentbg:#f1e9ff;
+  --r:18px; --shadow:0 6px 0 rgba(22,36,79,.10), 0 10px 24px rgba(22,36,79,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);background-image:radial-gradient(circle at 10% 0%,rgba(255,255,255,.9),transparent 40%),radial-gradient(circle at 100% 20%,var(--accentbg),transparent 45%);color:var(--ink);font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:18px;line-height:1.55;min-height:100vh;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4,.fred{font-family:"Fredoka","Nunito",system-ui,sans-serif;line-height:1.2;margin:0}
+button{font-family:inherit;font-size:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+input{font-family:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+
+/* top bar */
+.top{background:var(--navy);color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 3px 0 var(--gold)}
+.top .wrap{display:flex;align-items:center;gap:12px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand img{height:52px;width:auto;background:#fff;border-radius:10px;padding:3px}
+.wordmark{font-family:"Fredoka",sans-serif;font-weight:600;line-height:1.05;font-size:15px;color:var(--gold2)}
+.wordmark b{display:block;color:#fff;font-size:19px;letter-spacing:.5px}
+.brand .ttl{font-family:"Fredoka",sans-serif;font-size:17px;font-weight:500;opacity:.95;border-left:2px solid rgba(255,255,255,.25);padding-left:10px}
+.stats{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:999px;padding:4px 10px;font-weight:800;font-size:15px;white-space:nowrap}
+.chip.gold{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.ibtn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:12px;padding:5px 10px;font-weight:800;font-size:15px}
+.saved{font-size:13px;color:#b9f3c9;opacity:0;transition:opacity .4s;white-space:nowrap}
+.saved.on{opacity:1}
+.xpbar{height:8px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden;width:100%}
+.xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:99px;transition:width .6s}
+.lvlrow{width:100%;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;color:var(--gold2)}
+.lvlrow .xpbar{flex:1}
+
+main{padding:22px 0 40px}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:22px;border:2px solid var(--line)}
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:stretch}
+.hero h1{font-size:34px;color:var(--navy)}
+.hero .kicker{display:inline-block;background:var(--accent);color:#fff;border-radius:999px;padding:3px 12px;font-weight:800;font-size:14px;margin-bottom:10px}
+.hero p{margin:.6em 0}
+.namebox{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.namebox input{flex:1;min-width:160px;font-size:20px;padding:10px 14px;border-radius:14px;border:3px solid var(--line);outline:none}
+.namebox input:focus{border-color:var(--accent)}
+.btn{border:none;border-radius:14px;padding:12px 20px;font-weight:900;font-size:18px;background:var(--accent);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.18);transition:transform .08s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(0,0,0,.18)}
+.btn.gold{background:var(--gold);color:var(--navy)}
+.btn.ghost{background:#fff;color:var(--navy);border:3px solid var(--line);box-shadow:none}
+.btn.green{background:var(--good)}
+.btn.sm{padding:8px 14px;font-size:16px}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.say{border:2px solid var(--accent);background:var(--accentbg);color:var(--accent);border-radius:999px;padding:5px 12px;font-weight:900;font-size:15px;white-space:nowrap}
+.say.on{background:var(--accent);color:#fff}
+.howto{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border:none}
+.howto h3{color:var(--gold2);margin-bottom:8px}
+.howto ul{margin:0;padding-left:0;list-style:none}
+.howto li{margin:6px 0;padding-left:34px;position:relative}
+.howto li span{position:absolute;left:0;top:0;font-size:22px}
+
+.sect{display:flex;align-items:center;gap:10px;margin:26px 0 12px;flex-wrap:wrap}
+.sect h2{font-size:24px;color:var(--navy)}
+.sect .sub{color:var(--muted);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.lockc{position:relative;text-align:left;background:#fff;border:3px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;transition:transform .12s,border-color .12s;color:var(--ink)}
+.lockc:hover{transform:translateY(-3px);border-color:var(--accent)}
+.lockc .ic{font-size:36px;line-height:1}
+.lockc h3{font-size:20px;color:var(--navy)}
+.lockc .code{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.3px}
+.lockc .sk{font-size:15px;color:var(--muted)}
+.lockc .st{margin-top:auto;display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px}
+.pill{border-radius:999px;padding:3px 10px;font-weight:900;font-size:13px}
+.pill.new{background:#eef0fb;color:var(--navy2)}
+.pill.go{background:var(--warnbg);color:var(--warn)}
+.pill.done{background:var(--goodbg);color:var(--good)}
+.lockc .keyabs{position:absolute;top:10px;right:10px}
+.badges{display:flex;gap:10px;flex-wrap:wrap}
+.badge{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 12px;font-weight:800;font-size:15px}
+.badge .e{font-size:24px}
+.badge.lock{opacity:.4;filter:grayscale(1)}
+.badge small{display:block;font-weight:600;color:var(--muted);font-size:12px}
+.vaultcta{margin-top:20px;text-align:center;background:linear-gradient(135deg,#fff7d6,#ffe9a8);border:3px solid var(--gold)}
+.vaultcta h2{color:var(--navy);margin-bottom:6px}
+
+/* lock view */
+.lockhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.lockhead .ic{font-size:40px}
+.lockhead h2{font-size:26px;color:var(--navy)}
+.lockhead .code{font-size:13px;font-weight:800;color:var(--muted)}
+.steps{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.stp{border:2px solid var(--line);background:#fff;border-radius:999px;padding:5px 12px;font-weight:900;font-size:14px;color:var(--muted)}
+.stp.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.stp.ok{background:var(--goodbg);border-color:#a7e3bd;color:var(--good)}
+.lcard{max-width:860px;margin:0 auto}
+.lcard .chead{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.lcard .chead h3{font-size:24px;color:var(--navy);flex:1;min-width:200px}
+.tag{display:inline-block;border-radius:999px;padding:3px 12px;font-weight:900;font-size:13px;background:var(--accentbg);color:var(--accent)}
+.cbody p{margin:.5em 0}
+.cbody .big{font-size:21px}
+.callout{border-radius:14px;padding:12px 16px;margin:12px 0;border-left:6px solid var(--accent);background:var(--accentbg)}
+.callout.gold{border-color:var(--gold);background:#fff7dd}
+.callout.green{border-color:var(--good);background:var(--goodbg)}
+.terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.term{border:2px solid var(--line);border-radius:14px;padding:10px 12px;background:#fff}
+.term b{display:block;color:var(--accent);font-size:18px}
+.term span{font-size:16px}
+.flip{cursor:pointer;min-height:92px;position:relative}
+.flip .back{display:none}
+.flip.open .front{display:none}
+.flip.open .back{display:block}
+.flip .front{font-family:"Fredoka",sans-serif;font-size:20px;color:var(--navy);display:flex;align-items:center;justify-content:center;height:100%;text-align:center;flex-direction:column}
+.flip .front small{font-family:"Nunito";font-size:13px;color:var(--muted);font-weight:700}
+.stepl{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.stepl li{counter-increment:s;position:relative;padding:10px 12px 10px 56px;margin:8px 0;background:#fff;border:2px solid var(--line);border-radius:14px}
+.stepl li:before{content:counter(s);position:absolute;left:12px;top:10px;width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:900;display:flex;align-items:center;justify-content:center;font-family:"Fredoka"}
+.stepl li b{color:var(--navy)}
+.ex{background:#fffdf5;border:2px dashed var(--gold);border-radius:14px;padding:12px 16px;margin:10px 0;font-family:Georgia,"Times New Roman",serif;font-size:18px}
+.think{list-style:none;padding:0;margin:10px 0}
+.think li{display:flex;gap:10px;align-items:flex-start;margin:8px 0;background:#f6f8ff;border-radius:12px;padding:10px 12px}
+.think li:before{content:"💭";font-size:20px}
+.myth{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+.myth div{border-radius:14px;padding:10px 14px}
+.myth .m{background:var(--badbg);border:2px solid #f5c2c2}
+.myth .f{background:var(--goodbg);border:2px solid #a7e3bd}
+.myth b{display:block;font-size:14px;letter-spacing:.4px}
+.myth .m b{color:var(--bad)}
+.myth .f b{color:var(--good)}
+table.t{width:100%;border-collapse:separate;border-spacing:0;border:2px solid var(--line);border-radius:14px;overflow:hidden;margin:10px 0;font-size:16px}
+table.t th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-family:"Fredoka";font-weight:500}
+table.t td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:top;background:#fff}
+table.t tr:nth-child(even) td{background:#faf9ff}
+.tablewrap{overflow-x:auto}
+.navrow{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px;flex-wrap:wrap}
+.dots{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.dot{width:14px;height:14px;border-radius:50%;background:var(--line)}
+.dot.on{background:var(--accent);transform:scale(1.25)}
+.dot.g{background:var(--good)}.dot.y{background:var(--gold)}.dot.r{background:#f08a8a}
+
+/* practice */
+.prac{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.prac.solo{grid-template-columns:1fr;max-width:860px;margin:0 auto}
+.passage{position:sticky;top:120px;max-height:calc(100vh - 140px);overflow:auto}
+.passage h3{color:var(--navy);font-size:21px}
+.ptext{font-family:Georgia,"Times New Roman",serif;font-size:18px;line-height:1.65}
+.ptext p{margin:.6em 0}
+.ptext .pn{display:inline-block;min-width:22px;font-family:"Nunito";font-weight:900;font-size:12px;color:#fff;background:var(--navy2);border-radius:6px;padding:0 5px;margin-right:6px;vertical-align:2px;text-align:center}
+.ptext .poem{white-space:pre-line;font-style:italic}
+.ptext h4{font-family:"Fredoka";color:var(--accent);margin-top:10px}
+.ptext .src{font-family:"Nunito";font-size:13px;color:var(--muted)}
+.qtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.dok{border-radius:999px;padding:4px 12px;font-weight:900;font-size:13px;color:#fff}
+.dok1{background:#0ea5a4}.dok2{background:#2563eb}.dok3{background:#9333ea}
+.qnum{font-weight:900;color:var(--muted);font-size:14px}
+.qtext{font-size:21px;font-weight:800;color:var(--navy);margin:6px 0 14px}
+.excerpt{background:#fffdf5;border-left:5px solid var(--gold);padding:10px 14px;border-radius:10px;font-family:Georgia,serif;margin:0 0 12px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;background:#fff;border:3px solid var(--line);border-radius:16px;padding:12px 14px;font-size:18px;color:var(--ink);transition:border-color .1s,transform .08s;width:100%}
+.opt:hover{border-color:var(--accent)}
+.opt .L{flex:none;width:34px;height:34px;border-radius:10px;background:var(--accentbg);color:var(--accent);font-weight:900;display:flex;align-items:center;justify-content:center;font-family:"Fredoka"}
+.opt.wrong{border-color:#f5b5b5;background:var(--badbg);color:#8a2b2b;pointer-events:none}
+.opt.wrong .L{background:var(--bad);color:#fff}
+.opt.right{border-color:var(--good);background:var(--goodbg);pointer-events:none}
+.opt.right .L{background:var(--good);color:#fff}
+.opt.dim{opacity:.55;pointer-events:none}
+.fb{margin-top:14px;border-radius:16px;padding:14px 16px;font-size:17px;animation:pop .25s ease}
+.fb.bad{background:var(--badbg);border:2px solid #f5c2c2}
+.fb.good{background:var(--goodbg);border:2px solid #a7e3bd}
+.fb.hint{background:#fff7dd;border:2px solid #f6d77c}
+.fb h4{font-size:19px;margin-bottom:4px}
+.fb.bad h4{color:var(--bad)}.fb.good h4{color:var(--good)}.fb.hint h4{color:var(--warn)}
+.fb .fbrow{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.qtools{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.hintbtn{border:2px dashed var(--gold);background:#fffaf0;color:var(--warn);border-radius:999px;padding:6px 14px;font-weight:900;font-size:15px}
+.linkbtn{background:none;border:none;color:var(--accent);font-weight:900;text-decoration:underline;font-size:15px;padding:4px}
+.pts{font-family:"Fredoka";font-weight:600;color:var(--accent)}
+details.pmob{display:none}
+
+/* result */
+.result{text-align:center;max-width:720px;margin:0 auto}
+.result h2{font-size:32px;color:var(--navy);margin:8px 0}
+.bigkey{animation:spinin 1s cubic-bezier(.2,1.4,.4,1) both}
+.rstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.rstat{background:#f7f6ff;border-radius:14px;padding:10px}
+.rstat b{display:block;font-size:26px;font-family:"Fredoka";color:var(--accent)}
+.rstat span{font-size:14px;font-weight:800;color:var(--muted)}
+
+/* vault */
+.vault{max-width:760px;margin:0 auto;text-align:center}
+.door{width:260px;height:260px;margin:10px auto 20px;border-radius:50%;background:radial-gradient(circle,#c9ced9 0%,#8d95a8 60%,#5d667a 100%);border:12px solid #3d4558;position:relative;box-shadow:0 12px 30px rgba(0,0,0,.25);transition:transform 1.4s cubic-bezier(.6,0,.3,1)}
+.door .wheel{position:absolute;inset:60px;border-radius:50%;border:10px solid #2f3647;transition:transform 1.4s}
+.door .wheel:before,.door .wheel:after{content:"";position:absolute;left:50%;top:-10px;bottom:-10px;width:10px;margin-left:-5px;background:#2f3647}
+.door .wheel:after{transform:rotate(90deg)}
+.door.open{transform:perspective(800px) rotateY(-75deg) translateX(-40px)}
+.door.open .wheel{transform:rotate(540deg)}
+.cert{background:#fff;border:6px double var(--gold);border-radius:20px;padding:26px;margin-top:10px}
+.cert h1{font-size:32px;color:var(--navy)}
+.cert .nm{font-family:"Fredoka";font-size:36px;color:var(--accent);margin:8px 0;border-bottom:3px solid var(--gold);display:inline-block;padding:0 20px}
+.keyring{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:12px 0}
+
+footer{text-align:center;color:var(--muted);font-size:13px;padding:20px 16px 30px}
+footer button{font-size:12px;background:none;border:1px solid var(--line);border-radius:8px;padding:4px 8px;color:var(--muted);margin-top:8px}
+
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:99}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(140px);background:var(--navy);color:#fff;border:3px solid var(--gold);border-radius:18px;padding:10px 18px;font-weight:900;font-size:18px;z-index:98;transition:transform .35s cubic-bezier(.2,1.4,.4,1);max-width:92vw;text-align:center}
+#toast.on{transform:translateX(-50%) translateY(0)}
+@keyframes pop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes spinin{from{transform:scale(0) rotate(-200deg)}to{transform:scale(1) rotate(0)}}
+@keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}}
+.wiggle{animation:wiggle .4s ease 2}
+
+@media (max-width:900px){
+  .prac{grid-template-columns:1fr}
+  .passage{position:static;max-height:none}
+  .hero{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  body{font-size:17px}
+  .top{position:relative}
+  .passage{top:0}
+  .brand .ttl{display:none}
+  .hero h1{font-size:27px}
+  .myth{grid-template-columns:1fr}
+  .qtext{font-size:19px}
+  .rstats{grid-template-columns:1fr 1fr}
+  .card{padding:16px}
+}
+@media print{
+  .top,footer,.noprint{display:none!important}
+  body{background:#fff}
+}
+.opened{font-size:90px;line-height:1;margin:10px auto;filter:drop-shadow(0 0 24px rgba(245,183,10,.8));animation:spinin .9s cubic-bezier(.2,1.4,.4,1) both}
+.hear{display:inline-flex;align-items:center;gap:4px;border:2px solid var(--accent);background:#fff;color:var(--accent);border-radius:999px;padding:2px 10px;margin:2px 2px;font-weight:800;font-size:16px;font-family:inherit;vertical-align:middle}
+.hear.on{background:var(--accent);color:#fff}
+.bigword{font-family:"Fredoka",sans-serif;font-size:26px;color:var(--navy)}
+.bigword u{text-decoration:none;background:var(--accentbg);color:var(--accent);border-radius:6px;padding:0 3px}
+
+</style>
+</head>
+<body>
+<div id="app"></div>
+<canvas id="confetti"></canvas>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+/* LOGO: paste your logo as a data URL or image path between the quotes, e.g. window.LOGO_SRC = "logo.png"; */
+window.LOGO_SRC = "";
+</script>
+<script>
+window.TUTORIAL = {
+id:"figurative-language",
+short:"Figurative Language",
+kicker:"Extended Tutorial · ELA.6.R.3.1",
+title:"Figurative Language Quest",
+intro:`Authors don’t always say exactly what they mean, and that’s on purpose! <b>Figurative language</b> paints pictures, makes us feel, and sets the <b>tone</b>. In this quest, you’ll master similes, metaphors, personification, hyperbole, idioms, imagery, and sound devices. Then you’ll face the <b>Boss Level</b>, where you explain how they all work together to create tone and meaning.`,
+theme:{accent:"#0c8599",accent2:"#3bc9db",accentbg:"#e3f8fb"},
+locks:[
+/* ================= LOCK 1: SIMILE ================= */
+{id:"fl1",code:"ELA.6.R.3.1",icon:"🪞",name:"Simile Station",skill:"Literal vs. figurative language, and similes",
+remember:"A simile compares two different things using LIKE or AS. Ask: What two things are compared? What do they have in common? What feeling does that create?",
+lesson:[
+{t:"big",h:"Literal vs. figurative",body:`<p class="big"><b>Literal</b> language means exactly what it says. <b>Figurative</b> language uses words in a creative, non-literal way to create a picture or feeling.</p>
+<div class="tablewrap"><table class="t"><tr><th>Literal</th><th>Figurative</th></tr>
+<tr><td>I was very nervous.</td><td>My stomach was doing cartwheels.</td></tr>
+<tr><td>The room was quiet.</td><td>The room was as silent as a library at midnight.</td></tr></table></div>
+<div class="callout">🧪 <b>Test:</b> Could this REALLY happen? If not, it’s probably figurative. Translate it into plain words!</div>`},
+{t:"big",h:"Similes compare with LIKE or AS",body:`<p class="big">A <b>simile</b> compares two <b>unlike</b> things using the words <b>like</b> or <b>as</b>.</p>
+<p>🪞 The snow was <b>like</b> a white blanket. → Snow and a blanket both <b>cover</b> things softly.</p>
+<p>🪞 He was as busy <b>as</b> a bee. → He was working hard and moving fast.</p>
+<div class="callout gold">⚠️ Not every “like” is a simile! “I like pizza” and “She looks like her mom” are NOT similes. A simile compares two DIFFERENT kinds of things.</div>`},
+{t:"steps",h:"Strategy: Spot → Translate → Feel → Explain",steps:[
+["Spot it.","Look for like or as comparing two different things."],
+["Translate it.","What two things are compared? What do they have in common?"],
+["Feel it.","What emotion or mood does the comparison create?"],
+["Explain it.","“The simile compares ___ to ___ to show ___, which creates a ___ feeling.”"]]},
+{t:"example",h:"Watch it work",text:`After the game, Marcus’s legs felt like wet noodles.`,
+think:["<b>Spot:</b> “like wet noodles” is a simile.","<b>Translate:</b> His legs and wet noodles are both floppy and weak.","<b>Feel:</b> It shows exhaustion, with a touch of humor.","<b>Explain:</b> The simile compares his legs to wet noodles to show he is completely worn out."]},
+{t:"check",h:"Quick Check",q:"Which sentence contains a simile?",
+opts:["The baby’s cheeks were as soft as rose petals.","My sister looks like my dad.","I like chocolate ice cream.","The cat is sleeping on the couch."],
+miss:{1:"This compares two people who share features. They are the same kind of thing, so it isn’t a simile.",2:"Here “like” means “enjoy.” Nothing is being compared.",3:"This is literal. Nothing is compared."},
+why:"It compares two unlike things (cheeks and rose petals) using “as” to show how soft the cheeks are."},
+{t:"watch",h:"Watch out for these traps",items:[
+["Calling every sentence with “like” a simile.","It must compare two DIFFERENT kinds of things."],
+["Mixing up simile and metaphor.","Simile = like/as. Metaphor = says one thing IS another."],
+["Stopping at “It’s a simile.”","Explain WHAT it shows and HOW it makes the reader feel."]]}
+],
+passage:{title:"First Day Jitters",html:`<p><span class="pn">1</span>On the first day of middle school, Tasha’s stomach fluttered like a jar full of moths. The hallway was as crowded as a subway at rush hour, and the lockers stood in rows like silent metal soldiers.</p>
+<p><span class="pn">2</span>When she finally found Room 214, her new teacher smiled as warmly as a summer sidewalk. “Welcome, Tasha,” she said. “We saved you a seat by the window.”</p>
+<p><span class="pn">3</span>Tasha slid into her seat, quiet as a mouse. Sunlight poured across her desk like warm honey, and her heartbeat slowed down like a song fading at the end.</p>`},
+questions:[
+{dok:1,q:"Which phrase from the passage is a simile?",
+opts:["“fluttered like a jar full of moths”","“On the first day of middle school”","“she finally found Room 214”","“We saved you a seat by the window”"],
+miss:{1:"This tells when the story happens. Nothing is compared.",2:"This is literal. She really found the room.",3:"This is literal dialogue. Nothing is compared."},
+hint:"Look for “like” or “as” comparing two different things.",why:"It compares Tasha’s stomach to a jar of moths using “like.”"},
+{dok:1,q:"In “The hallway was as crowded as a subway at rush hour,” what two things are being compared?",
+opts:["the hallway and a crowded subway","Tasha and the other students","the lockers and metal soldiers","the teacher and a summer sidewalk"],
+miss:{1:"Tasha isn’t in this comparison. Look at the words before and after “as crowded as.”",2:"That comparison is in the NEXT part of the sentence.",3:"That comparison is in paragraph 2."},
+hint:"Find the words on each side of “as crowded as.”",why:"The simile compares the hallway to a subway at rush hour. Both are packed with people."},
+{dok:2,q:"What does “Tasha’s stomach fluttered like a jar full of moths” suggest about how she feels?",
+opts:["She feels very nervous and jittery about the first day.","She feels hungry because she skipped breakfast that morning.","She feels excited to catch bugs in science class.","She feels sleepy and calm about the day ahead."],
+miss:{1:"The story says nothing about food. Think about what “fluttered” feels like.",2:"There are no real moths. The comparison is about a FEELING.",3:"Moths fluttering in a jar are frantic, not calm."},
+hint:"Picture moths trapped in a jar. Are they calm or frantic?",why:"Moths flapping in a jar are frantic and restless, like the nervous “butterflies” Tasha feels in her stomach."},
+{dok:2,q:"What does the simile “her new teacher smiled as warmly as a summer sidewalk” suggest?",
+opts:["The teacher is friendly and welcoming.","The teacher has been standing outside in the heat.","The teacher is strict and hard to please.","The teacher is tired after a long walk to school."],
+miss:{1:"That’s a literal reading. The simile is about her SMILE, not the weather.",2:"A warm smile is the opposite of strict. She also saved Tasha a seat.",3:"Nothing suggests she walked anywhere. Focus on what “warmly” means for a smile."},
+hint:"What does a “warm” smile mean? Check what the teacher says next.",why:"A warm smile is a friendly one, and the teacher proves it by welcoming Tasha and saving her a seat."},
+{dok:3,q:"How do the similes change from the beginning to the end of the passage, and what does this show?",
+opts:["They shift from crowded, jittery comparisons to warm, gentle ones, showing Tasha’s feelings change from nervous to calm.","They shift from happy comparisons to scary ones, showing Tasha becomes more and more afraid as the day goes on.","They stay exactly the same the whole time, showing that Tasha never changes how she feels about her first day.","They shift from comparisons about animals to comparisons about food, showing that Tasha is getting hungry for lunch."],
+miss:{1:"It’s the opposite: moths, crowds, and soldiers come first; honey and a fading song come last.",2:"Compare “jar full of moths” with “warm honey.” The feelings are very different.",3:"Honey is food, but the point is the FEELING, not hunger."},
+hint:"Compare the similes in paragraph 1 with the ones in paragraph 3.",why:"Early similes (moths, a crowded subway, soldiers) feel tense, and later ones (warm honey, a fading song) feel calm. They show Tasha relaxing."},
+{dok:3,q:"If the author changed “Tasha slid into her seat, quiet as a mouse” to “Tasha slid into her seat quietly,” what would be lost?",
+opts:["The image of Tasha being small, shy, and careful not to be noticed","The fact that Tasha found a seat by the window in her classroom","The information that it is the first day of middle school for Tasha","The sound of the teacher saying, “Welcome, Tasha,” to the class"],
+miss:{1:"The seat is still there in the new sentence. Only the comparison is gone.",2:"That fact is in paragraph 1 and isn’t affected.",3:"The dialogue is in paragraph 2. It isn’t part of this change."},
+hint:"What do you picture when you think of a mouse?",why:"A mouse is small, shy, and careful. The simile adds that picture, which “quietly” alone doesn’t."}
+]},
+
+/* ================= LOCK 2: METAPHOR ================= */
+{id:"fl2",code:"ELA.6.R.3.1",icon:"🎭",name:"Metaphor Mansion",skill:"Metaphors and extended metaphors",
+remember:"A metaphor says one thing IS another, with no like or as. An extended metaphor keeps the comparison going across many sentences. Ask: What is really being described, and what does the comparison reveal?",
+lesson:[
+{t:"big",h:"A metaphor says one thing IS another",body:`<p class="big">A <b>metaphor</b> compares two unlike things by saying one thing <b>is</b> another, without using like or as.</p>
+<p>🎭 The classroom <b>was</b> a zoo. → It was loud, wild, and chaotic.</p>
+<p>🎭 Her words <b>were</b> daggers. → Her words were sharp and hurtful.</p>
+<div class="callout">🔁 <b>Simile:</b> The classroom was <i>like</i> a zoo. <b>Metaphor:</b> The classroom <i>was</i> a zoo. The metaphor feels stronger, as if it’s really true!</div>`},
+{t:"big",h:"Extended metaphors",body:`<p class="big">An <b>extended metaphor</b> keeps one comparison going for several sentences, or even a whole poem.</p>
+<div class="ex">Life is a highway. Some days the road is smooth and wide open. Other days you hit potholes, take wrong turns, or get stuck in traffic. But you keep driving toward your destination.</div>
+<p>Every detail (road, potholes, wrong turns, traffic) continues the comparison between <b>life</b> and a <b>highway</b>.</p>`},
+{t:"terms",h:"Metaphor words to know",items:[["Metaphor","A comparison that says one thing IS another.","🎭"],["Extended metaphor","A metaphor that continues across several lines or sentences.","🧵"],["Literal meaning","What the words actually say.","📏"],["Figurative meaning","The deeper idea the comparison suggests.","💭"]]},
+{t:"check",h:"Quick Check",q:"Which sentence is a metaphor?",
+opts:["My backpack is a boulder on my shoulders.","My backpack is as heavy as a boulder.","My backpack has three zippers and a pocket.","My backpack feels like it weighs a ton."],
+miss:{1:"This uses “as,” so it’s a simile.",2:"This is literal. Nothing is compared.",3:"This uses “like,” so it’s a simile (and also an exaggeration)."},
+why:"It says the backpack IS a boulder, with no like or as, to show how heavy it feels."},
+{t:"watch",h:"Watch out for these traps",items:[
+["Calling a metaphor “literal.”","The backpack isn’t really a boulder. Translate it!"],
+["Missing an extended metaphor.","If several details fit the same comparison, it’s extended."],
+["Only naming it.","Explain what the comparison reveals about the person, place, or idea."]]}
+],
+passage:{title:"The Repair Hospital",html:`<p><span class="pn">1</span>Grandpa’s garage is a hospital for broken things. The workbench is the operating table, and Grandpa is the surgeon, his reading glasses perched on his nose.</p>
+<p><span class="pn">2</span>Every Saturday, the neighbors bring him their wounded: a radio that won’t sing, a bicycle with a twisted spine, a lamp that has lost its light. Grandpa never turns a patient away. “Everything deserves a second chance,” he says, tightening a screw.</p>
+<p><span class="pn">3</span>When I watch him work, I notice that his hands are maps of every repair he has ever made: small scars, rough calluses, and a burn shaped like a crescent moon.</p>
+<p><span class="pn">4</span>Someday, I hope to be a doctor in that hospital too.</p>`},
+questions:[
+{dok:1,q:"“Grandpa’s garage is a hospital for broken things.” What type of figurative language is this?",
+opts:["Metaphor","Simile","Onomatopoeia","Alliteration"],
+miss:{1:"There is no “like” or “as” in this sentence.",2:"Onomatopoeia is a sound word like “buzz.”",3:"Alliteration repeats beginning sounds. This sentence compares two things."},
+hint:"Does it use “like” or “as,” or does it say one thing IS another?",why:"It says the garage IS a hospital without using like or as, so it’s a metaphor."},
+{dok:1,q:"In the extended metaphor, who or what is the “surgeon”?",
+opts:["Grandpa","The narrator","The neighbors","The workbench"],
+miss:{1:"The narrator watches and hopes to be a doctor SOMEDAY.",2:"The neighbors bring the “wounded.” They are like the patients’ families.",3:"The workbench is the “operating table.”"},
+hint:"Reread paragraph 1.",why:"Paragraph 1 says, “Grandpa is the surgeon.”"},
+{dok:2,q:"In “a bicycle with a twisted spine,” what does “spine” most likely stand for?",
+opts:["The bicycle’s bent frame","A bone in Grandpa’s back","The bicycle’s flat tire","A broken bicycle bell"],
+miss:{1:"The phrase describes the bicycle, not Grandpa.",2:"A spine runs down the middle, like a frame, not around like a tire.",3:"A bell isn’t the main support of a bike, the way a spine is for a body."},
+hint:"A spine is the long support down the middle of a body. What part of a bike does that job?",why:"The frame holds a bike together like a spine holds up a body, so a “twisted spine” is a bent frame."},
+{dok:2,q:"What does the narrator mean by “his hands are maps of every repair he has ever made”?",
+opts:["The scars and calluses on his hands show the history of all his work.","Grandpa draws maps of the neighborhood to find broken things.","Grandpa’s hands are covered in ink from writing all his repair notes.","Grandpa uses a map to find his way to the neighbors’ houses."],
+miss:{1:"There are no real maps. The metaphor compares his hands to maps.",2:"The paragraph describes scars, calluses, and a burn, not ink.",3:"Grandpa works in his garage. The neighbors come to him."},
+hint:"A map shows where you have been. What do Grandpa’s scars show?",why:"Like a map records places, the marks on his hands record every job he has done."},
+{dok:3,q:"Why does the author use an extended metaphor comparing the garage to a hospital?",
+opts:["To show that Grandpa treats broken objects with the same care a doctor gives patients","To show that Grandpa used to be a real surgeon at a hospital before he retired","To show that the neighbors are often sick and need Grandpa to take them to a doctor","To show that the garage is very clean, bright, and white like a hospital hallway"],
+miss:{1:"Nothing says Grandpa was a real surgeon. The comparison is figurative.",2:"The “wounded” are objects, like radios and lamps, not people.",3:"The metaphor is about care and healing, not how the garage looks."},
+hint:"Think about Grandpa’s words: “Everything deserves a second chance.”",why:"Every detail (surgeon, patients, wounded) shows Grandpa “heals” things with patience and care, like a doctor."},
+{dok:3,q:"How does the last sentence, “Someday, I hope to be a doctor in that hospital too,” develop the meaning of the passage?",
+opts:["It continues the metaphor to show the narrator admires Grandpa and wants to follow in his footsteps.","It reveals that the narrator plans to go to medical school and become a real doctor someday.","It shows that the narrator is worried Grandpa’s garage will close because he is too old to work.","It ends the metaphor and changes the topic to the narrator’s favorite school subjects."],
+miss:{1:"That’s a literal reading. “That hospital” is the garage!",2:"Nothing hints at worry. The sentence is hopeful.",3:"It doesn’t end the metaphor. It continues it with “doctor” and “hospital.”"},
+hint:"What is “that hospital” really?",why:"Staying inside the metaphor, the narrator says they want to repair things like Grandpa, which shows admiration."}
+]},
+
+/* ================= LOCK 3: PERSONIFICATION ================= */
+{id:"fl3",code:"ELA.6.R.3.1",icon:"🌬️",name:"Personification Park",skill:"Giving human qualities to non-human things",
+remember:"Personification gives human actions, feelings, or traits to something that isn’t human. Ask: What is it really doing? Why make it seem alive?",
+lesson:[
+{t:"big",h:"Making things come alive",body:`<p class="big"><b>Personification</b> gives <b>human qualities</b> (actions, feelings, or speech) to animals, objects, nature, or ideas.</p>
+<p>🌬️ The wind <b>whispered</b> through the trees. → The wind made a soft sound.</p>
+<p>⏰ My alarm clock <b>screamed</b> at me. → The alarm was loud and annoying.</p>
+<p>☀️ The sun <b>smiled</b> down on the picnic. → It was a warm, pleasant day.</p>`},
+{t:"steps",h:"Strategy: Find the human verb",steps:[
+["Find the non-human thing.","An object, an animal, nature, or an idea."],
+["Find the human word.","Look for verbs and feelings people have: whispered, danced, grumbled, sighed."],
+["Translate.","What is it REALLY doing? (The clock is ringing loudly.)"],
+["Explain the effect.","Why make it seem alive? Does it create a mood?"]]},
+{t:"check",h:"Quick Check",q:"Which sentence uses personification?",
+opts:["The old car coughed and wheezed up the hill.","The old car was red with a dented door.","The old car was as slow as a turtle.","The old car drove up the steep hill."],
+miss:{1:"This is a literal description.",2:"This is a simile, comparing the car to a turtle with “as.”",3:"Cars really drive. This is literal."},
+why:"Coughing and wheezing are human actions, used here to describe a struggling car engine."},
+{t:"watch",h:"Watch out for these traps",items:[
+["Thinking any animal action is personification.","A dog barking is literal. A dog “sighing about Mondays” is personified!"],
+["Missing personification hidden in a verb.","Look for HUMAN verbs: grumbled, danced, begged."],
+["Forgetting the effect.","Personification often creates mood: spooky, cozy, or playful."]]}
+],
+passage:{title:"The Old House at Night",by:"A poem",html:`<p class="poem">When the family falls asleep,
+the old house begins to talk.
+The stairs groan about their aching knees,
+the windows shiver and gossip with the wind,
+and the refrigerator hums a lonely tune.
+The clock on the wall taps its foot, impatient,
+counting every second until morning.
+Only the moon, a quiet night-light,
+peeks through the curtains
+and tells them all to hush.</p>`},
+questions:[
+{dok:1,q:"Which line uses personification?",
+opts:["“The stairs groan about their aching knees,”","“When the family falls asleep,”","“Only the moon, a quiet night-light,”","“through the curtains”"],
+miss:{1:"People really fall asleep. This is literal.",2:"This is a metaphor, calling the moon a night-light.",3:"This phrase only tells where. Nothing is given human traits."},
+hint:"Find something non-human doing something only people do.",why:"Stairs don’t have knees or complain. Giving them aching knees and a voice is personification."},
+{dok:1,q:"What human action does the poet give the refrigerator?",
+opts:["It hums a lonely tune.","It taps its foot.","It gossips with the wind.","It tells everyone to hush."],
+miss:{1:"That is the clock.",2:"That is the windows.",3:"That is the moon."},
+hint:"Find the line with “refrigerator.”",why:"The refrigerator “hums a lonely tune,” as if it were a person singing."},
+{dok:2,q:"“The clock on the wall taps its foot, impatient, counting every second until morning.” What does this suggest about the night?",
+opts:["The night feels long and slow, like time is dragging.","The clock is broken and cannot keep the time.","Morning will arrive in just a few short minutes.","The family wakes up early to go dancing together."],
+miss:{1:"The clock is counting every second, so it’s working fine.",2:"An impatient clock suggests a LONG wait, not a short one.",3:"The family is asleep. There is no real dancing."},
+hint:"When do people tap their feet impatiently?",why:"People tap their feet when waiting feels long. The ticking clock seems eager for a morning that’s slow to come."},
+{dok:2,q:"“The windows shiver and gossip with the wind.” What is most likely REALLY happening?",
+opts:["The windows rattle and make noise as the wind blows against them.","The windows are open, and people outside are talking about the family.","The windows are freezing over because it is snowing heavily outside.","The windows are being washed by someone who is talking to the wind."],
+miss:{1:"The family is asleep, and no people are mentioned outside.",2:"“Shiver” suggests shaking, not ice. Nothing mentions snow.",3:"No one is washing windows at night in this poem."},
+hint:"Translate “shiver” and “gossip” into what windows can really do.",why:"Shivering = rattling, and gossiping = whispering sounds as the wind blows against them."},
+{dok:3,q:"How does personification create the tone of the poem?",
+opts:["By making the house seem alive, it creates a playful, slightly mysterious tone.","By describing the house with exact measurements, it creates a scientific tone.","By making the house seem dangerous and angry, it creates a terrifying tone.","By listing facts about appliances, it creates a serious, informative tone."],
+miss:{1:"The poem has no measurements. It is full of human actions.",2:"The house grumbles and gossips, but it isn’t angry or dangerous. The moon calmly says “hush.”",3:"The poem gives objects feelings. It isn’t a list of facts."},
+hint:"Is a groaning, gossiping, humming house scary, silly, or a bit of both?",why:"A house that talks, gossips, and hums at night feels playful but a little mysterious, as if it has a secret life."},
+{dok:3,q:"Why does the poet personify the moon as telling everyone to “hush” at the end?",
+opts:["To bring the poem to a calm ending, with the moon as a gentle caretaker that quiets the house","To show that the moon is angry at the family for staying up too late and making noise","To explain the scientific reason why houses make noises at night in the wintertime","To introduce a new character who will wake the family up early the next morning"],
+miss:{1:"The FAMILY is asleep. The moon is quieting the house.",2:"The poem doesn’t give scientific reasons.",3:"The moon brings quiet. It doesn’t wake anyone."},
+hint:"What does a parent do when they say “hush” at bedtime?",why:"Like a parent at bedtime, the “quiet night-light” moon calms the noisy house, giving the poem a peaceful ending."}
+]},
+
+/* ================= LOCK 4: HYPERBOLE ================= */
+{id:"fl4",code:"ELA.6.R.3.1",icon:"💥",name:"Hyperbole Hype",skill:"Extreme exaggeration for effect",
+remember:"Hyperbole is an exaggeration so big it can’t be true. Ask: What is the REAL meaning, and what feeling does the exaggeration show (frustration, excitement, humor)?",
+lesson:[
+{t:"big",h:"The biggest exaggeration EVER",body:`<p class="big"><b>Hyperbole</b> (hy-PER-buh-lee) is an extreme <b>exaggeration</b> that is not meant to be taken literally.</p>
+<p>💥 I’ve told you a <b>million times</b>! → I’ve told you many times, and I’m frustrated.</p>
+<p>💥 This bag weighs a <b>ton</b>! → This bag is very heavy.</p>
+<p>💥 I’m so hungry I could eat a <b>horse</b>! → I’m very hungry.</p>
+<div class="callout">💥 Writers use hyperbole to show <b>strong emotions</b>, add <b>humor</b>, or make a point <b>memorable</b>.</div>`},
+{t:"steps",h:"Strategy: Shrink it down",steps:[
+["Spot the exaggeration.","Is it impossible or WAY too big?"],
+["Shrink it to the truth.","“A million years” → a long time."],
+["Name the feeling.","Why exaggerate? Frustration? Excitement? Humor?"]]},
+{t:"check",h:"Quick Check",q:"Which sentence uses hyperbole?",
+opts:["My little brother screamed so loud that people in China heard him.","My little brother screamed when he saw the spider.","My little brother is louder than my sister.","My little brother screams like a fire alarm."],
+miss:{1:"This is literal. It could really happen.",2:"This is a real comparison that could be true.",3:"This is a simile (“like a fire alarm”)."},
+why:"No one in China could hear him. The huge exaggeration shows how loud he was."},
+{t:"watch",h:"Watch out for these traps",items:[
+["Taking hyperbole literally.","Shrink it down to what really happened."],
+["Mixing it up with a simile.","Hyperbole exaggerates. A simile compares with like/as. (Some phrases do both!)"],
+["Ignoring the tone.","Hyperbole often makes writing humorous or dramatic."]]}
+],
+passage:{title:"The Worst Chore in History",html:`<p><span class="pn">1</span>Cleaning my room is the hardest job in the universe. Mom says it will take ten minutes, but I know it will take ten thousand years.</p>
+<p><span class="pn">2</span>There are so many clothes on my floor that explorers could get lost in there for weeks. Under my bed, I found a sock so old it had its own fossil record.</p>
+<p><span class="pn">3</span>By the time I finished, I was so tired I could have slept until the next century. I collapsed on my bed.</p>
+<p><span class="pn">4</span>Then Mom peeked in, looked at her watch, and smiled. “See? Ten minutes.”</p>`},
+questions:[
+{dok:1,q:"Which phrase is an example of hyperbole?",
+opts:["“it will take ten thousand years”","“Then Mom peeked in, smiled”","“I collapsed on my bed”","“looked at her watch”"],
+miss:{1:"Mom really peeks in. This is literal.",2:"This could really happen after a tiring chore.",3:"This is literal. Mom checks the time."},
+hint:"Which choice is impossible?",why:"Cleaning a room can’t take ten thousand years. The exaggeration shows how much the narrator dreads the chore."},
+{dok:1,q:"Which statement about hyperbole is TRUE?",
+opts:["It is an extreme exaggeration that is not meant to be taken literally.","It compares two unlike things using the words “like” or “as” in a sentence.","It is a word that imitates the sound of something.","It gives human qualities to an animal or object."],
+miss:{1:"That describes a simile.",2:"That describes onomatopoeia.",3:"That describes personification."},
+hint:"Think: hyper = over, beyond.",why:"Hyperbole means exaggerating way beyond the truth for effect."},
+{dok:2,q:"What does “a sock so old it had its own fossil record” REALLY mean?",
+opts:["The sock had been lost under the bed for a very long time.","The sock was found during a dinosaur museum field trip last year.","The sock was made out of hard, gray stone and was very heavy.","The sock belonged to the narrator’s great-grandparents."],
+miss:{1:"There’s no field trip. The sock was under the bed.",2:"It isn’t literally stone. Shrink the exaggeration down.",3:"Nothing says whose sock it was. The point is how long it was lost."},
+hint:"Fossils are millions of years old. Shrink that down.",why:"The exaggeration means the sock had been forgotten under the bed for a really long time."},
+{dok:2,q:"What is the real meaning of “explorers could get lost in there for weeks”?",
+opts:["There are huge piles of clothes, and the room is extremely messy.","The narrator’s room is so large that it has real hiking trails.","The narrator’s friends often get lost in the house.","Explorers visit the narrator’s house to study the clothes."],
+miss:{1:"The room isn’t really huge. The CLOTHES are the problem.",2:"No friends are mentioned. The exaggeration is about the mess.",3:"No real explorers visit. This is an exaggeration."},
+hint:"What is causing explorers to get “lost”?",why:"The exaggeration shows the floor is buried under piles of clothes, so the room is extremely messy."},
+{dok:3,q:"How does Mom’s final line, “See? Ten minutes,” affect the hyperboles in the passage?",
+opts:["It reveals the narrator was exaggerating all along, which makes the passage funny.","It proves that the narrator really did spend ten thousand years cleaning the room.","It shows that Mom is angry because the room is still a terrible mess.","It shows that the narrator’s watch was broken the entire time."],
+miss:{1:"Mom’s line shows the chore took only ten minutes. The hyperbole was never true!",2:"Mom smiles. She isn’t angry, and the room is finished.",3:"Mom checks HER watch. Nothing is broken."},
+hint:"Compare “ten thousand years” with what Mom says.",why:"The contrast between the dramatic exaggerations and the real ten minutes creates humor and shows the narrator was being dramatic."},
+{dok:3,q:"What tone does the hyperbole create in the passage?",
+opts:["A humorous, dramatic tone of complaining","A serious, scientific tone of explaining","A frightening, suspenseful tone of danger","A sad, hopeless tone of losing something"],
+miss:{1:"Fossil socks and lost explorers are not scientific. They’re silly!",2:"Nothing in the room is dangerous. The exaggerations are funny.",3:"The narrator isn’t truly sad. The complaining is over the top on purpose."},
+hint:"How do you feel reading about a sock with a fossil record?",why:"The over-the-top exaggerations make the narrator’s complaining sound dramatic and funny."}
+]},
+
+/* ================= LOCK 5: IDIOMS ================= */
+{id:"fl5",code:"ELA.6.V.1.3",icon:"🏝️",name:"Idiom Island",skill:"Sayings whose meaning differs from their words",
+remember:"An idiom is a common saying that doesn’t mean what its words say. Use context to figure out the real meaning, and never take it literally!",
+lesson:[
+{t:"big",h:"Sayings with secret meanings",body:`<p class="big">An <b>idiom</b> is a common expression whose meaning is different from the meanings of its individual words.</p>
+<div class="tablewrap"><table class="t"><tr><th>Idiom</th><th>Real meaning</th></tr>
+<tr><td>It’s raining cats and dogs.</td><td>It’s raining very hard.</td></tr>
+<tr><td>Break a leg!</td><td>Good luck!</td></tr>
+<tr><td>Piece of cake</td><td>Very easy</td></tr>
+<tr><td>Hit the books</td><td>Study hard</td></tr>
+<tr><td>Under the weather</td><td>Feeling sick</td></tr>
+<tr><td>Spill the beans</td><td>Tell a secret</td></tr></table></div>`},
+{t:"terms",h:"Flip the idioms",items:[["Throw in the towel","to give up","🏳️"],["In the same boat","in the same situation as others","🚣"],["A long shot","something unlikely to happen","🎯"],["Heart in your throat","very nervous or scared","😰"],["Cost an arm and a leg","very expensive","💸"],["Let the cat out of the bag","reveal a secret","🐱"]]},
+{t:"steps",h:"Strategy: Context is king",steps:[
+["Notice when words don’t make literal sense.","No one is really breaking a leg!"],
+["Look at the situation.","Who is talking? What is happening?"],
+["Plug in a meaning.","Does “good luck” fit the moment? Then that’s it."]]},
+{t:"check",h:"Quick Check",text:`“I can’t go to the party,” Sam said. “I’m feeling under the weather.”`,q:"What does “under the weather” mean?",
+opts:["feeling sick","standing under a cloud","excited about the weather","busy with homework"],
+miss:{1:"That’s literal. Idioms aren’t meant word for word.",2:"Sam is skipping the party, so he’s not excited.",3:"Homework isn’t mentioned. Think about why someone skips a party."},
+why:"“Under the weather” is an idiom that means feeling ill."},
+{t:"watch",h:"Watch out for these traps",items:[
+["Picking the literal meaning.","If it sounds silly literally, it’s probably an idiom."],
+["Ignoring the situation.","Context tells you whether “break a leg” is a wish or a warning."],
+["Confusing idioms with hyperbole.","Some idioms exaggerate, but idioms are FIXED sayings that everyone knows."]]}
+],
+passage:{title:"The Big Game",html:`<p><span class="pn">1</span>“Break a leg out there!” Coach Rivera called as Jada jogged onto the court. Jada’s heart was in her throat. The other team was undefeated, and everyone said winning would be a long shot.</p>
+<p><span class="pn">2</span>In the first quarter, Jada missed three shots in a row. She wanted to sit down and hide. “Don’t throw in the towel,” her teammate Lena whispered. “We’re all in the same boat.”</p>
+<p><span class="pn">3</span>Jada took a deep breath. In the final seconds, she sank a three-pointer, and the gym went wild.</p>
+<p><span class="pn">4</span>“That was a piece of cake!” Lena laughed.</p>
+<p><span class="pn">5</span>Jada grinned and wiped her forehead. “Not exactly. But it was worth every drop of sweat.”</p>`},
+questions:[
+{dok:1,q:"When Coach Rivera says, “Break a leg out there!” what does she mean?",
+opts:["Good luck!","Be careful not to fall!","Play rough with the other team!","Run as fast as you can!"],
+miss:{1:"That’s a literal reading. Coaches don’t want players to break their legs!",2:"A coach wouldn’t encourage rough play this way. It’s a friendly saying.",3:"Speed isn’t part of the meaning. It’s a common wish before a performance."},
+hint:"People say this to actors before a show.",why:"“Break a leg” is an idiom that means good luck."},
+{dok:1,q:"What does “Jada’s heart was in her throat” mean?",
+opts:["Jada was very nervous.","Jada had a sore throat.","Jada was out of breath.","Jada was feeling proud."],
+miss:{1:"That’s literal. Her heart didn’t really move!",2:"She just jogged onto the court. This is about feelings, not breathing.",3:"The game hasn’t started, and the other team is undefeated. She isn’t proud yet."},
+hint:"How would you feel before playing an undefeated team?",why:"The idiom means very nervous or scared, which fits facing an undefeated team."},
+{dok:2,q:"“Everyone said winning would be a long shot.” What does “a long shot” mean?",
+opts:["unlikely to happen","a shot from far away","certain to happen","a game that lasts a long time"],
+miss:{1:"That’s a literal reading. Here it describes the chance of winning.",2:"The other team is undefeated, so winning ISN’T certain.",3:"It’s about the chance of winning, not the length of the game."},
+hint:"The other team is undefeated. What are Jada’s chances?",why:"“A long shot” is an idiom for something unlikely, which fits playing an undefeated team."},
+{dok:2,q:"What is Lena telling Jada when she says, “Don’t throw in the towel. We’re all in the same boat”?",
+opts:["Don’t give up, because the whole team is facing this challenge together.","Don’t throw your towel, because the coach will get angry with you.","Don’t sit down, because the team is about to go on a boat trip.","Don’t worry, because the other team is about to give up."],
+miss:{1:"That’s literal. Nobody is throwing a real towel.",2:"There is no real boat. Translate the idiom!",3:"Lena is talking about HER team, not the other team."},
+hint:"Jada wants to “sit down and hide.” What does Lena want her to do instead?",why:"“Throw in the towel” means give up, and “in the same boat” means in the same situation. Lena is encouraging Jada to keep going together."},
+{dok:3,q:"Lena says the win was “a piece of cake,” but Jada answers, “Not exactly.” Why?",
+opts:["The win wasn’t easy; Jada missed shots and worked hard, so the idiom doesn’t fit her experience.","Jada is disappointed because the team didn’t get any cake after winning the game.","Jada thinks the other team let them win on purpose, so the victory doesn’t really count at all.","Jada misunderstood Lena and thought she was talking about a real dessert."],
+miss:{1:"That’s a literal reading. “Piece of cake” means easy.",2:"Nothing suggests the other team let them win. Jada sank the shot herself.",3:"Jada understands the idiom. That’s why she disagrees with it!"},
+hint:"“Piece of cake” means easy. Was it easy for Jada?",why:"Jada missed three shots and was sweating. The win was hard-earned, so “not exactly” rejects the idea that it was easy."},
+{dok:3,q:"Why do idioms work well in this passage?",
+opts:["They make the dialogue sound natural, like real teammates talking, and reveal the characters’ feelings.","They make the passage sound formal and scientific, like a textbook explaining the rules of basketball.","They confuse readers on purpose, so the ending of the game feels like a surprise twist.","They show that the characters are not good at speaking and do not know the right words."],
+miss:{1:"Idioms are casual, everyday language, not formal or scientific.",2:"Context makes each idiom clear. They aren’t meant to confuse.",3:"Everyday speakers use idioms all the time. They show natural speech, not weak speaking."},
+hint:"Do people really talk this way in real life?",why:"Idioms are everyday expressions, so they make the characters sound realistic and quickly show feelings like nervousness and encouragement."}
+]},
+
+/* ================= LOCK 6: IMAGERY ================= */
+{id:"fl6",code:"ELA.6.R.3.1",icon:"🌈",name:"Imagery Garden",skill:"Sensory language that appeals to the five senses",
+remember:"Imagery uses sensory details (sight, sound, smell, taste, touch) to pull readers into a scene. Ask: Which sense? What mood does it create?",
+lesson:[
+{t:"big",h:"Writing you can see, hear, smell, taste, and touch",body:`<p class="big"><b>Imagery</b> is descriptive language that appeals to the <b>five senses</b>. It helps readers experience a scene as if they were there.</p>
+<div class="tablewrap"><table class="t"><tr><th>Sense</th><th>Example</th></tr>
+<tr><td>👀 Sight</td><td>golden sunlight spilled across the floor</td></tr>
+<tr><td>👂 Sound</td><td>leaves crunched under our boots</td></tr>
+<tr><td>👃 Smell</td><td>the sharp scent of fresh-cut grass</td></tr>
+<tr><td>👅 Taste</td><td>the sour tang of a lemon drop</td></tr>
+<tr><td>✋ Touch</td><td>the rough bark scraped my palms</td></tr></table></div>`},
+{t:"steps",h:"Strategy: Sense detective",steps:[
+["Find the descriptive words.","Look for adjectives and vivid verbs."],
+["Name the sense.","Which of the five senses does it appeal to?"],
+["Name the mood.","Cozy? Gloomy? Exciting? Peaceful?"],
+["Explain the effect.","How does it pull the reader in or reveal a character’s feelings?"]]},
+{t:"check",h:"Quick Check",q:"“The sizzling bacon popped and crackled in the pan.” Which sense does this mainly appeal to?",
+opts:["Sound","Sight","Touch","Taste"],
+miss:{1:"You might picture it, but “sizzling,” “popped,” and “crackled” are sounds.",2:"Nothing describes how the bacon feels.",3:"The sentence doesn’t describe the flavor."},
+why:"Sizzling, popping, and crackling are all sounds."},
+{t:"watch",h:"Watch out for these traps",items:[
+["Thinking imagery is only about sight.","Imagery can appeal to ALL five senses."],
+["Missing the mood.","Imagery isn’t just decoration. It sets the feeling of a scene."],
+["Picking a plain sentence as “imagery.”","Imagery is specific and vivid: not “food,” but “warm, buttery cinnamon rolls.”"]]}
+],
+passage:{title:"Saturday Market",html:`<p><span class="pn">1</span>The farmers’ market woke up before the sun. Golden light spilled over tables piled with plump red tomatoes and glossy purple eggplants. The air smelled of warm bread and sweet, sticky honey.</p>
+<p><span class="pn">2</span>Vendors called out prices, and a fiddle squeaked a cheerful tune near the fountain. I bit into a peach so juicy that sticky nectar ran down my wrist.</p>
+<p><span class="pn">3</span>The cool morning breeze brushed my arms as I wandered between the stalls, wishing Saturday could last forever.</p>`},
+questions:[
+{dok:1,q:"“The air smelled of warm bread and sweet, sticky honey.” Which sense does this appeal to?",
+opts:["Smell","Sound","Sight","Touch"],
+miss:{1:"Nothing in the sentence makes a sound.",2:"You may picture bread, but the key verb is “smelled.”",3:"The sentence describes a scent, not how something feels."},
+hint:"Look at the verb.",why:"The word “smelled” and the scents of bread and honey appeal to smell."},
+{dok:1,q:"Which phrase appeals mainly to the sense of TOUCH?",
+opts:["“The cool morning breeze brushed my arms”","“a fiddle squeaked a cheerful little tune”","“glossy purple eggplants”","“Vendors called out prices”"],
+miss:{1:"A squeaking fiddle is something you hear.",2:"“Glossy purple” describes how something looks.",3:"Calling out prices is a sound."},
+hint:"Which detail describes how something feels on your skin?",why:"A breeze brushing your arms is something you feel on your skin."},
+{dok:2,q:"Which sentence appeals to BOTH taste and touch?",
+opts:["“I bit into a peach so juicy that sticky nectar ran down my wrist.”","“The farmers’ market woke up before the sun.”","“Vendors called out their prices to the crowds near the busy fountain.”","“Golden light spilled over tables piled with plump red tomatoes.”"],
+miss:{1:"This is personification and doesn’t appeal to taste.",2:"This appeals to sound, not taste or touch.",3:"This appeals to sight."},
+hint:"Which sentence has someone eating AND feeling something on their skin?",why:"Biting a juicy peach appeals to taste, and sticky nectar on the wrist appeals to touch."},
+{dok:2,q:"What mood does the imagery in the passage create?",
+opts:["cheerful and peaceful","tense and frightening","gloomy and lonely","angry and frustrated"],
+miss:{1:"Nothing is scary. The details are sweet, warm, and golden.",2:"The market is lively and bright, not gloomy.",3:"No one is angry. The narrator wishes Saturday could last forever."},
+hint:"How do golden light, a cheerful tune, and juicy peaches make you feel?",why:"Warm light, sweet smells, music, and juicy fruit create a cheerful, peaceful mood."},
+{dok:3,q:"How does the imagery help readers understand the narrator’s feelings?",
+opts:["The pleasant sensory details show how much the narrator enjoys the market, leading to the wish that “Saturday could last forever.”","The unpleasant sensory details show that the narrator is bored, tired, and wants to go home from the market as quickly as possible.","The imagery describes only the vendors and their tables, so readers can’t tell how the narrator feels about the market.","The imagery shows that the narrator is worried about spending too much money at the market."],
+miss:{1:"The details are pleasant: golden light, warm bread, a cheerful tune.",2:"The narrator eats, smells, and wanders. Readers experience it all through their senses.",3:"Money is never mentioned."},
+hint:"Connect the details to the last sentence.",why:"Every sense is filled with something pleasant, which shows the narrator’s joy and explains the wish for Saturday to last forever."},
+{dok:3,q:"Which revision of “The vendors sold flowers” adds the MOST vivid imagery?",
+opts:["Buckets of sunflowers, their heavy yellow heads nodding, filled the air with a sweet, grassy scent.","The vendors sold lots and lots of very nice, pretty flowers at the market that day for people.","There were many flowers for sale at some of the tables at the farmers’ market that morning.","The vendors sold flowers, and many people bought flowers from the vendors."],
+miss:{1:"“Very nice” is vague. Imagery needs specific sensory details.",2:"This is still plain. What do the flowers look or smell like?",3:"This repeats words but adds no sensory details."},
+hint:"Which choice lets you SEE and SMELL the flowers?",why:"It adds sight (heavy yellow heads nodding) and smell (sweet, grassy scent), which makes the scene vivid."}
+]},
+
+/* ================= LOCK 7: SOUND DEVICES ================= */
+{id:"fl7",code:"ELA.6.R.3.1",icon:"🥁",name:"Sound Effects Studio",skill:"Onomatopoeia and alliteration",
+remember:"Onomatopoeia = words that sound like what they mean (buzz, crack). Alliteration = repeated beginning consonant sounds (wild winds whistle). Both make writing sound like the scene.",
+lesson:[
+{t:"big",h:"Words you can hear",body:`<p class="big">Some figurative language is all about <b>sound</b>.</p>
+<p>🥁 <b>Onomatopoeia</b> (ON-uh-mat-uh-PEE-uh): a word that imitates a sound. <i>buzz, sizzle, crash, hiss, boom, drip</i></p>
+<p>🔤 <b>Alliteration</b>: repeating the same beginning consonant sound in nearby words. <i><b>S</b>ally <b>s</b>ells <b>s</b>eashells</i>; <i><b>w</b>ild <b>w</b>inds <b>w</b>histle</i></p>
+<div class="callout">🎧 Read it aloud! Sound devices only come alive when you HEAR them. Tap 🔊 Read to me.</div>`},
+{t:"terms",h:"Sound effect starter kit",items:[["Onomatopoeia","A word that imitates a sound (bang, whoosh).","💥"],["Alliteration","Repeated beginning consonant sounds (big brown bear).","🔤"],["Rhythm","The beat of the words when read aloud.","🥁"],["Mood","The feeling the sounds create.","🌈"]]},
+{t:"check",h:"Quick Check",q:"Which sentence uses alliteration?",
+opts:["Seven slippery snakes slid silently south.","The snake hissed at the mouse.","The snake was as long as a garden hose.","The snake rested on a warm rock."],
+miss:{1:"“Hissed” is onomatopoeia, not alliteration.",2:"This is a simile.",3:"This is a plain, literal sentence with no repeated beginning sounds."},
+why:"Almost every word repeats the beginning “s” sound, which even sounds like a snake!"},
+{t:"watch",h:"Watch out for these traps",items:[
+["Looking at letters instead of sounds.","Alliteration is about SOUND: “cute kitten” counts; “city cat” doesn’t."],
+["Missing onomatopoeia in verbs.","Hissed, buzzed, and crashed are sound words too."],
+["Naming the device without the effect.","Explain how the sound matches the scene or mood."]]}
+],
+passage:{title:"Storm Song",by:"A poem",html:`<p class="poem">Crack! The thunder splits the sky,
+Rain rattles roofs and rushes by.
+Drip, drop, splash, the gutters gush,
+Wild winds whistle, then a hush.
+Puddles plop and settle, spread,
+Soggy sneakers, sleepy bed.</p>`},
+questions:[
+{dok:1,q:"Which word from the poem is an example of onomatopoeia?",
+opts:["Crack","sky","roofs","sleepy"],
+miss:{1:"“Sky” doesn’t imitate a sound.",2:"“Roofs” is just a noun. It doesn’t imitate a sound.",3:"“Sleepy” describes a feeling, not a sound."},
+hint:"Which word sounds like the noise it names?",why:"“Crack” imitates the sharp sound of thunder."},
+{dok:1,q:"“Rain rattles roofs and rushes by” is mainly an example of",
+opts:["alliteration","a simile","a metaphor","hyperbole"],
+miss:{1:"There is no “like” or “as” comparison.",2:"Nothing is said to BE something else.",3:"Nothing is exaggerated."},
+hint:"Listen to the beginning sounds.",why:"Rain, rattles, roofs, and rushes all begin with the “r” sound."},
+{dok:2,q:"What is the effect of the alliteration in “Wild winds whistle”?",
+opts:["The repeated “w” sound imitates the whooshing sound of the wind.","The repeated “w” sound makes the storm seem silly and harmless.","It shows that the wind is the only part of the storm that is loud.","It explains the scientific cause of strong winds during storms."],
+miss:{1:"The sound matches the wind. It doesn’t make the storm silly.",2:"Thunder and rain are loud too. The alliteration is about sound effect.",3:"Poems with sound devices don’t explain science."},
+hint:"Say “wild winds whistle” out loud. What do you hear?",why:"The airy “w” sound mimics the wind, so readers almost hear it blowing."},
+{dok:2,q:"Why does the poet begin the poem with “Crack!”?",
+opts:["To grab the reader’s attention with the sudden, sharp sound of thunder","To show that something in the house has broken into pieces","To describe the sound of someone cracking an egg for breakfast","To show that the poem will be about a quiet, gentle rain shower in spring"],
+miss:{1:"The next words, “The thunder splits the sky,” show it’s thunder.",2:"No eggs here! The line is about thunder.",3:"“Crack!” is loud and sudden, the opposite of quiet."},
+hint:"How does starting with a loud sound make you feel?",why:"Starting with a sharp sound word drops readers right into the storm, just like a sudden thunderclap."},
+{dok:3,q:"How do the sound devices change from the beginning to the end of the poem, and what does this show?",
+opts:["Loud, sharp sounds (crack, rattles, gush) give way to soft ones (hush, plop, sleepy), showing the storm calming down.","Soft, quiet sounds give way to loud, crashing ones, showing that the storm is growing stronger and more dangerous.","The sounds stay loud the whole time, showing that the storm never ends and keeps everyone awake.","The poem uses no sound devices at the end, showing that the poet ran out of ideas for the poem."],
+miss:{1:"It’s the opposite: the loud sounds come FIRST.",2:"“Hush” and “sleepy” are soft. The ending is quiet.",3:"“Plop” and the soft “s” sounds are still sound devices."},
+hint:"Compare line 1 with the last two lines.",why:"The poem starts with harsh sounds and ends with soft ones (“hush,” “sleepy”), so the sounds themselves show the storm ending."},
+{dok:3,q:"Which line BEST signals the shift from storm to calm?",
+opts:["“Wild winds whistle, then a hush.”","“Crack! The thunder splits the sky,”","“Rain rattles roofs and rushes by.”","“Drip, drop, splash, the gutters gush,”"],
+miss:{1:"This is the loud beginning of the storm.",2:"This line is still full of rushing, rattling rain.",3:"The gutters are still gushing. The storm is going strong."},
+hint:"Look for the word that means “quiet.”",why:"The word “then” plus “a hush” marks the turn from whistling wind to quiet."}
+]},
+
+/* ================= LOCK 8: BOSS LEVEL ================= */
+{id:"fl8",code:"ELA.6.R.3.1",icon:"🏰",name:"Boss Level: Tone & Meaning",skill:"How figurative language works together to create tone and meaning",
+remember:"To explain figurative language, go beyond naming it: Spot it → Translate it → Feel it (tone) → Explain how it builds meaning. Watch for tone SHIFTS across a text.",
+lesson:[
+{t:"big",h:"Putting it all together",body:`<p class="big">On the FAST, the big question is: <b>How does figurative language contribute to TONE and MEANING?</b></p>
+<ul><li><b>Tone</b> is the author’s attitude: hopeful, gloomy, humorous, tense, admiring…</li><li><b>Meaning</b> is what the reader understands about a character, setting, or theme.</li></ul>
+<div class="callout">🏰 Strong readers notice <b>patterns</b>. Are the comparisons dark at first and bright at the end? That’s a <b>tone shift</b>, and it usually signals a change in a character.</div>`},
+{t:"table",h:"Your figurative language toolkit",head:["Device","Clue","Ask"],
+rows:[["Simile","like / as","What two things? What’s the shared quality?"],["Metaphor","is / was / are","What is it REALLY? What does the comparison reveal?"],["Personification","human verbs for non-human things","What is it really doing? Why make it alive?"],["Hyperbole","impossible exaggeration","What’s the truth? What feeling is shown?"],["Idiom","a common saying","What does it mean in context?"],["Imagery","sensory details","Which sense? What mood?"],["Sound devices","sound words, repeated sounds","What do you hear? How does it fit the scene?"]]},
+{t:"steps",h:"The 4-step explanation",steps:[
+["Spot it.","Name the device."],["Translate it.","Say what it means in plain words."],["Feel it.","Name the tone or mood it creates."],
+["Explain it.","“The author uses ___ to show ___, which creates a ___ tone and helps readers understand ___.”"]]},
+{t:"check",h:"Quick Check",text:`The abandoned playground was a graveyard of rusty swings that creaked in the cold wind.`,q:"What tone does the figurative language create?",
+opts:["Gloomy and lonely","Cheerful and playful","Silly and humorous","Excited and energetic"],
+miss:{1:"A “graveyard” and “rusty swings” aren’t cheerful.",2:"Nothing here is meant to be funny.",3:"An abandoned playground in the cold feels empty, not energetic."},
+why:"The metaphor “graveyard,” the creaking sound, and the cold wind create a gloomy, lonely tone."}
+],
+passage:{title:"One Red Leaf",html:`<p><span class="pn">1</span>All summer, the old maple outside Leo’s window had been a green umbrella over the backyard. Now, in late November, it stood bare and bony, shivering in the wind like a forgotten scarecrow. Only one red leaf remained, clinging to a branch with all its might.</p>
+<p><span class="pn">2</span>Leo had been stuck inside for weeks with a broken leg, and the days crawled by like snails in molasses. “I’ve been staring at these walls for a million years,” he grumbled.</p>
+<p><span class="pn">3</span>Every morning he checked the leaf. The wind howled. Rain pounded the glass. Still, the stubborn little leaf held on.</p>
+<p><span class="pn">4</span>“If that leaf can hang in there,” Leo whispered one gray morning, “so can I.”</p>
+<p><span class="pn">5</span>When his cast finally came off, Leo limped outside. The leaf had fallen at last, but it lay on the grass like a small red flag of victory, and Leo smiled.</p>`},
+questions:[
+{dok:1,q:"“The old maple … had been a green umbrella over the backyard.” What type of figurative language is this?",
+opts:["Metaphor","Simile","Onomatopoeia","Idiom"],
+miss:{1:"There is no “like” or “as” in this comparison.",2:"No word imitates a sound here.",3:"This isn’t a common saying. It’s a new comparison."},
+hint:"Is the tree LIKE an umbrella, or does the sentence say it WAS one?",why:"It says the tree WAS an umbrella (no like or as), showing how its leaves covered and shaded the yard."},
+{dok:1,q:"What does the simile “the days crawled by like snails in molasses” mean?",
+opts:["Time passed very slowly for Leo.","Leo spent his days watching snails in the yard.","Leo ate pancakes with molasses every day.","The days passed by quickly for Leo."],
+miss:{1:"There are no real snails. Translate the comparison.",2:"Molasses is part of the comparison, not his breakfast.",3:"Snails in sticky molasses would be extremely SLOW."},
+hint:"How fast would a snail move through thick, sticky syrup?",why:"Snails are slow, and molasses is thick and sticky, so the days felt painfully slow."},
+{dok:2,q:"“I’ve been staring at these walls for a million years.” What does this hyperbole show about Leo?",
+opts:["He is bored and frustrated from being stuck inside.","He has been alive for a very long time, longer than anyone.","He is excited to redecorate his bedroom walls.","He enjoys staying inside and resting all day."],
+miss:{1:"That’s a literal reading. Shrink the exaggeration down.",2:"Nothing mentions redecorating. He “grumbled.”",3:"The word “grumbled” shows he does NOT enjoy it."},
+hint:"Look at the verb after the quotation: “he grumbled.”",why:"The exaggeration and “grumbled” show how bored and frustrated Leo feels being stuck inside."},
+{dok:2,q:"When Leo says, “If that leaf can hang in there, so can I,” what double meaning does “hang in there” have?",
+opts:["The leaf is literally hanging on the branch, and the idiom means to keep going through hard times.","The leaf is about to be cut down, and the idiom means to give up when things get tough.","Leo is hanging a picture on his bedroom wall, and the idiom means to decorate a room.","Leo is going to climb the tree, and the idiom means to be careful when climbing."],
+miss:{1:"No one cuts the leaf, and “hang in there” means the opposite of giving up.",2:"There is no picture. The phrase connects Leo to the leaf.",3:"Leo can’t climb with a broken leg, and the idiom means to persevere."},
+hint:"Think about what the leaf is literally doing AND what the saying means.",why:"The leaf is literally hanging on, and “hang in there” is an idiom for not giving up. Leo connects the leaf’s struggle to his own."},
+{dok:3,q:"How does the figurative language shift the tone from the beginning to the end of the passage?",
+opts:["Early images (bare and bony, shivering scarecrow, crawling days) feel gloomy, while the ending (“flag of victory,” Leo smiled) feels hopeful and triumphant.","Early images feel joyful and bright, while the ending feels dark and hopeless because the last red leaf finally falls from the tree to the cold ground.","The tone stays gloomy and hopeless the entire time, because Leo never recovers from his broken leg.","The tone stays silly and humorous throughout the whole passage, because the leaf and Leo are both joking with each other the entire time."],
+miss:{1:"The early images (bare, bony, shivering) are gloomy, and the fallen leaf becomes a “flag of VICTORY.”",2:"Leo’s cast comes off, and he smiles. The ending isn’t hopeless.",3:"Leo’s hyperbole is a little funny, but the passage is mostly about struggle and hope."},
+hint:"Compare the images in paragraph 1 with the image in paragraph 5.",why:"Gloomy images early on (a bare, shivering tree, crawling days) change to a victory image at the end, which shows the tone shifting from gloomy to hopeful."},
+{dok:3,q:"How does the personification of the leaf (“clinging … with all its might,” “stubborn”) help develop the meaning of the passage?",
+opts:["It gives the leaf human determination, which mirrors Leo’s struggle and shows the message that persistence helps you get through hard times.","It shows that the leaf is angry at Leo for staring at it every morning, which creates conflict between the two characters in the story.","It explains the scientific reason that some leaves stay on trees longer than others do during the cold months of late autumn.","It shows that the leaf is weak and about to give up, which tells readers that Leo will also give up on getting better."],
+miss:{1:"“Stubborn” here means determined, not angry, and there’s no conflict between them.",2:"The passage doesn’t give scientific reasons. The leaf’s human traits are about MEANING.",3:"The leaf holds on “with all its might.” It is strong, not giving up."},
+hint:"What do Leo and the leaf have in common?",why:"By giving the leaf human determination, the author links it to Leo. The leaf inspires him to “hang in there,” which builds the theme of persistence."}
+]}
+]};
+
+</script>
+<script>
+(function(){
+"use strict";
+const T = window.TUTORIAL;
+const LOGO = window.LOGO_SRC || "";
+const KEY = "literacy-locksmith-fast6-" + T.id + "-v1";
+const $ = s => document.querySelector(s);
+const app = $("#app");
+document.documentElement.style.setProperty("--accent", T.theme.accent);
+document.documentElement.style.setProperty("--accent2", T.theme.accent2);
+document.documentElement.style.setProperty("--accentbg", T.theme.accentbg);
+
+/* ---------- autosave (stays on this iPad) ---------- */
+function fresh(){return {name:"",xp:0,streak:0,best:0,dok3:0,badges:[],locks:{},view:"home",lock:null,step:"learn",sound:true,slow:false,vaultOpen:false};}
+function load(){try{const r=localStorage.getItem(KEY);if(!r)return null;return Object.assign(fresh(),JSON.parse(r));}catch(e){return null;}}
+let S = load() || fresh();
+let savedTimer=null;
+function save(){
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+  const el=$("#saved"); if(el){el.classList.add("on");clearTimeout(savedTimer);savedTimer=setTimeout(()=>el.classList.remove("on"),1600);}
+}
+function LS(id){return S.locks[id]||(S.locks[id]={card:0,learned:false,q:0,ans:{},tc:{},done:false,key:null,first:0,retake:false,noHint:true});}
+function lockById(id){return T.locks.find(l=>l.id===id);}
+
+/* ---------- helpers ---------- */
+function hash(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+function order(seed,n){const a=[...Array(n).keys()];let h=hash(seed);for(let i=n-1;i>0;i--){h=Math.imul(h^(h>>>15),2246822507)>>>0;h=(h+0x9e3779b9)>>>0;const j=h%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+const LET="ABCD";
+const LEVELS=[[0,"Key Finder"],[100,"Apprentice Locksmith"],[250,"Junior Locksmith"],[450,"Locksmith"],[700,"Master Locksmith"],[1000,"Vault Legend"]];
+function level(){let i=0;LEVELS.forEach((l,k)=>{if(S.xp>=l[0])i=k;});const cur=LEVELS[i],nxt=LEVELS[i+1];const pct=nxt?Math.round((S.xp-cur[0])/(nxt[0]-cur[0])*100):100;return {name:cur[1],num:i+1,pct,next:nxt?nxt[0]:null};}
+const BADGES=[
+ ["first","🔑","First Key","Finish any lock"],
+ ["fire","🔥","On Fire","5 first-try answers in a row"],
+ ["solo","🧠","Solo Solver","Finish a lock with no Key Clues"],
+ ["flaw","💎","Flawless","Every answer right on the first try in a lock"],
+ ["owl","🦉","Deep Thinker","5 DOK 3 questions right on the first try"],
+ ["books","📚","Lesson Lover","Finish every lesson"],
+ ["gold3","🏆","Gold Collector","Earn 3 gold keys"],
+ ["vault","👑","Vault Master","Open the vault"]
+];
+const KEYCOL={gold:["#f5b70a","#ffe08a"],silver:["#9aa3b5","#e3e7ef"],bronze:["#c26a2c","#f2b98a"]};
+function keySVG(type,size){const c=type?KEYCOL[type]:["#c9cbd6","#eceef4"];size=size||40;
+ return `<svg width="${size}" height="${size}" viewBox="0 0 64 64" aria-hidden="true"><circle cx="20" cy="22" r="14" fill="${c[0]}" stroke="#16244f" stroke-width="3"/><circle cx="20" cy="22" r="6" fill="${c[1]}" stroke="#16244f" stroke-width="3"/><path d="M30 30 L54 54 M44 44 L50 38 M50 50 L56 44" stroke="#16244f" stroke-width="9" stroke-linecap="round"/><path d="M30 30 L54 54 M44 44 L50 38 M50 50 L56 44" stroke="${c[0]}" stroke-width="5" stroke-linecap="round"/></svg>`;}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function toast(msg){const t=$("#toast");t.innerHTML=msg;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),2600);}
+function addXP(n,why){if(n<=0)return;S.xp+=n;if(why)toast(`⭐ +${n} XP · ${why}`);}
+function award(id){if(S.badges.includes(id))return;S.badges.push(id);const b=BADGES.find(x=>x[0]===id);setTimeout(()=>{toast(`${b[1]} New badge: <b>${b[2]}</b>!`);sfx("key");},900);}
+
+/* ---------- sound effects ---------- */
+let AC=null;
+function sfx(type){if(!S.sound)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume();
+ const seq={good:[[660,0],[880,.09],[1320,.18]],bad:[[300,0],[240,.13]],key:[[523,0],[659,.1],[784,.2],[1047,.32]],tap:[[620,0]]}[type]||[];
+ seq.forEach(([f,t])=>{const o=AC.createOscillator(),g=AC.createGain();o.type=type==="bad"?"sine":"triangle";o.frequency.value=f;const st=AC.currentTime+t;g.gain.setValueAtTime(.0001,st);g.gain.exponentialRampToValueAtTime(type==="bad"?.08:.14,st+.02);g.gain.exponentialRampToValueAtTime(.0001,st+.2);o.connect(g);g.connect(AC.destination);o.start(st);o.stop(st+.22);});}catch(e){}}
+
+/* ---------- read aloud (Google US English voice) ---------- */
+const TTS={voice:null,btn:null,queue:[],
+ pick(){if(!("speechSynthesis" in window))return;const vs=speechSynthesis.getVoices();
+   this.voice=vs.find(v=>v.name==="Google US English")||vs.find(v=>/en[-_]US/i.test(v.lang)&&/Samantha|Ava|Allison|Susan|Zira|Jenny|Aria|Nicky/i.test(v.name))||vs.find(v=>/en[-_]US/i.test(v.lang))||null;},
+ clean(t){return t
+   .replace(/ELA\.\d+\.[A-Z]+(\.\d+)*/g,"")
+   .replace(/\bDOK\s*\d\b/g,"")
+   .replace(/\/([a-zA-Z]{1,3})\//g," $1 sound ")
+   .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}\u{2190}-\u{21FF}\u{2300}-\u{23FF}]/gu,"")
+   .replace(/[•·▶→←]/g," ").replace(/\s+/g," ").trim();},
+ chunks(t){const parts=t.match(/[^.!?]+[.!?"”’)]*\s*/g)||[t];const out=[];let cur="";parts.forEach(p=>{if((cur+p).length>220&&cur){out.push(cur);cur=p;}else cur+=p;});if(cur.trim())out.push(cur);return out;},
+ stop(){try{speechSynthesis.cancel();}catch(e){}this.queue=[];if(this.btn){this.btn.classList.remove("on");this.btn.innerHTML=this.btn.dataset.label;}this.btn=null;},
+ speak(text,btn){
+   if(!("speechSynthesis" in window)){toast("Read-aloud is not available on this device.");return;}
+   const same=this.btn===btn&&btn;this.stop();if(same)return;
+   if(!this.voice)this.pick();
+   this.btn=btn;if(btn){btn.dataset.label=btn.dataset.label||btn.innerHTML;btn.classList.add("on");btn.innerHTML="⏹ Stop";}
+   this.queue=this.chunks(this.clean(text));this.next();},
+ next(){if(!this.queue.length){this.stop();return;}const u=new SpeechSynthesisUtterance(this.queue.shift());
+   if(this.voice){u.voice=this.voice;u.lang=this.voice.lang;}else u.lang="en-US";
+   u.rate=S.slow?0.8:0.95;u.pitch=1;u.onend=()=>{if(this.btn)this.next();};u.onerror=()=>this.stop();speechSynthesis.speak(u);}
+};
+if("speechSynthesis" in window){TTS.pick();speechSynthesis.onvoiceschanged=()=>TTS.pick();}
+function textOf(el){const c=el.cloneNode(true);c.querySelectorAll("[data-nosay]").forEach(x=>x.remove());c.querySelectorAll(".flip .front").forEach(x=>x.remove());c.querySelectorAll(".flip .back").forEach(x=>{x.style.display="block";});c.querySelectorAll("p,li,h3,h4,div,tr,td,th,br").forEach(x=>x.insertAdjacentText("afterend"," . "));return c.textContent.replace(/(\s*\.\s*){2,}/g,". ");}
+
+/* ---------- confetti ---------- */
+function confetti(n){n=n||170;const c=$("#confetti"),x=c.getContext("2d");const W=c.width=innerWidth,H=c.height=innerHeight;
+ const cols=["#f5b70a","#ff5fa2","#3ec1d3","#7b3fe4","#22c55e","#ff8c42","#2563eb"];
+ const ps=[...Array(n)].map((_,i)=>({x:Math.random()*W,y:-20-Math.random()*H*.6,vx:(Math.random()-.5)*5,vy:2+Math.random()*4,r:Math.random()*6.3,vr:(Math.random()-.5)*.35,w:7+Math.random()*7,h:9+Math.random()*9,c:cols[i%cols.length]}));
+ const t0=performance.now();(function f(t){x.clearRect(0,0,W,H);let alive=false;ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.06;p.r+=p.vr;if(p.y<H+30)alive=true;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.w/2,-p.h/2,p.w,p.h);x.restore();});if(alive&&t-t0<6000)requestAnimationFrame(f);else x.clearRect(0,0,W,H);})(t0);}
+
+/* ---------- top bar ---------- */
+function keysEarned(){return T.locks.filter(l=>S.locks[l.id]&&S.locks[l.id].done).length;}
+function topbar(){const lv=level();
+ const logo=LOGO?`<img src="${LOGO}" alt="The Literacy Locksmith logo">`:`<div class="wordmark">The Literacy<b>LOCKSMITH</b></div>`;
+ return `<header class="top noprint"><div class="wrap">
+  <div class="brand">${logo}<div class="ttl">${esc(T.short)}</div></div>
+  <div class="stats">
+   <span class="saved" id="saved">✔ Saved on this iPad</span>
+   <span class="chip gold" title="Experience points">⭐ ${S.xp} XP</span>
+   <span class="chip" title="Keys earned">🔑 ${keysEarned()}/${T.locks.length}</span>
+   <span class="chip" title="First-try streak">🔥 ${S.streak}</span>
+   <button class="ibtn" data-act="slow" title="Read-aloud speed">${S.slow?"🐢 Slow":"🐇 Normal"}</button>
+   <button class="ibtn" data-act="sound" title="Sound effects">${S.sound?"🔔 On":"🔕 Off"}</button>
+  </div>
+  <div class="lvlrow"><span>Lv ${lv.num} · ${lv.name}</span><div class="xpbar"><i style="width:${lv.pct}%"></i></div><span>${lv.next?(lv.next-S.xp)+" XP to next level":"MAX LEVEL!"}</span></div>
+ </div></header>`;}
+function footer(){return `<footer class="noprint">🔐 The Literacy Locksmith · Created and copyrighted by Donna Rees<br>Aligned to the Florida B.E.S.T. ELA Standards, Grade 6 · ${esc(T.title)}<br><button data-act="reset">Teacher: reset this device</button></footer>`;}
+
+/* ---------- HOME ---------- */
+function home(){
+ const allDone=T.locks.every(l=>S.locks[l.id]&&S.locks[l.id].done);
+ const greet=S.name?`<p class="big"><b>Welcome back, ${esc(S.name)}!</b> Your progress is saved right here on this iPad. Pick a lock below to keep going.</p>`:
+ `<p>Type your first name so your certificate knows who you are:</p><div class="namebox"><input id="nm" maxlength="24" placeholder="First name" autocomplete="off"><button class="btn" data-act="name">Let's go! 🚀</button></div>`;
+ let h=`<section class="hero"><div class="card" id="intro"><span class="kicker">${esc(T.kicker)}</span><h1>${esc(T.title)}</h1>
+  <p>${T.intro}</p>${greet}
+  <div class="qtools" data-nosay><button class="say" data-say="#intro">🔊 Read to me</button></div></div>
+  <div class="card howto" id="how"><h3>🗝️ How to Unlock the Vault</h3><ul>
+   <li><span>📘</span><b>Learn It:</b> Read (or listen to) the lesson cards. Tap the flip cards and try the Quick Checks.</li>
+   <li><span>🎯</span><b>Prove It:</b> Answer FAST-style questions at DOK 1, 2, and 3.</li>
+   <li><span>🔧</span><b>Wrong answer?</b> You'll see WHY it's a trap, then try again. First try = 10 XP, second = 5, third = 2.</li>
+   <li><span>🔑</span><b>Key Clues</b> give a hint but cost 3 XP.</li>
+   <li><span>🥇</span>Earn a <b>gold, silver, or bronze key</b> for each lock. Collect them all to open the vault!</li>
+  </ul></div></section>`;
+ h+=`<div class="sect"><h2>🔒 The Locks</h2><span class="sub">${T.locks.length} skills in this category · tap any lock to start</span></div><div class="grid">`;
+ T.locks.forEach((l,i)=>{const st=S.locks[l.id];let pill=`<span class="pill new">New</span>`;
+  if(st&&st.done)pill=`<span class="pill done">Unlocked · ${st.key} key</span>`;else if(st&&(st.card>0||st.q>0||st.learned))pill=`<span class="pill go">In progress</span>`;
+  h+=`<button class="lockc" data-act="open" data-id="${l.id}"><span class="keyabs">${keySVG(st&&st.done?st.key:null,34)}</span><span class="ic">${l.icon}</span><span class="code">Lock ${i+1} · ${l.code}</span><h3>${esc(l.name)}</h3><span class="sk">${esc(l.skill)}</span><span class="st">${pill}</span></button>`;});
+ h+=`</div>`;
+ if(allDone)h+=`<div class="card vaultcta"><h2>🏦 Every lock is open!</h2><p>You collected all ${T.locks.length} keys. The vault is waiting...</p><button class="btn gold" data-act="vault">Open the Vault 🔓</button></div>`;
+ h+=`<div class="sect"><h2>🏅 Badges</h2><span class="sub">${S.badges.length}/${BADGES.length} earned</span></div><div class="badges">`;
+ BADGES.forEach(b=>{h+=`<div class="badge ${S.badges.includes(b[0])?"":"lock"}"><span class="e">${b[1]}</span><span>${b[2]}<small>${b[3]}</small></span></div>`;});
+ h+=`</div>`;return h;}
+
+/* ---------- LESSON ---------- */
+function cardHTML(c,l,ci){let b="";
+ switch(c.t){
+  case "big":b=c.body;break;
+  case "terms":b=`<p>${c.intro||"Tap each card to flip it and reveal the meaning."}</p><div class="terms">${c.items.map(t=>`<div class="term flip" data-act="flip"><div class="front">${t[2]||""} ${t[0]}<small>tap to flip</small></div><div class="back"><b>${t[0]}</b><span>${t[1]}</span></div></div>`).join("")}</div>`;break;
+  case "steps":b=(c.intro?`<p>${c.intro}</p>`:"")+`<ol class="stepl">${c.steps.map(s=>`<li><b>${s[0]}</b><br>${s[1]}</li>`).join("")}</ol>`+(c.after||"");break;
+  case "example":b=(c.intro?`<p>${c.intro}</p>`:"")+`<div class="ex">${c.text}</div><p><b>Watch how a strong reader thinks:</b></p><ul class="think">${c.think.map(x=>`<li><span>${x}</span></li>`).join("")}</ul>`+(c.after?`<div class="callout green">${c.after}</div>`:"");break;
+  case "watch":b=`<p>${c.intro||"These are the traps test makers love. Don't fall for them!"}</p>`+c.items.map(m=>`<div class="myth"><div class="m"><b>❌ TRAP</b>${m[0]}</div><div class="f"><b>✅ FIX</b>${m[1]}</div></div>`).join("");break;
+  case "table":b=(c.intro?`<p>${c.intro}</p>`:"")+`<div class="tablewrap"><table class="t"><tr>${c.head.map(x=>`<th>${x}</th>`).join("")}</tr>${c.rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join("")}</tr>`).join("")}</table></div>`+(c.after||"");break;
+  case "check":{const st=LS(l.id).tc[ci]||{wrong:[],ok:false};const ord=order(l.id+"tc"+ci,c.opts.length);
+   b=(c.text?`<div class="ex">${c.text}</div>`:"")+`<p class="qtext">${c.q}</p><div class="opts">`+ord.map((o,i)=>{const cls=st.ok&&o===0?"right":st.wrong.includes(o)?"wrong":st.ok?"dim":"";return `<button class="opt ${cls}" data-act="tc" data-ci="${ci}" data-o="${o}"><span class="L">${LET[i]}</span><span>${c.opts[o]}</span></button>`;}).join("")+`</div>`;
+   if(st.ok)b+=`<div class="fb good"><h4>✅ Nice! ${st.wrong.length===0?"+5 XP":""}</h4>${c.why}</div>`;
+   else if(st.wrong.length){const last=st.wrong[st.wrong.length-1];b+=`<div class="fb bad"><h4>🔧 Not quite — fix the thinking</h4>${c.miss&&c.miss[last]?c.miss[last]:"Look back at the lesson and try again."}</div>`;}
+   break;}
+  default:b=c.body||"";}
+ return `<div class="card lcard" id="lc"><div class="chead"><span class="tag" data-nosay>${c.tag||({big:"Big Idea",terms:"Key Words",steps:"Strategy",example:"Model",watch:"Watch Out!",table:"Know It",check:"Quick Check"}[c.t]||"Lesson")}</span><h3>${c.h}</h3><button class="say" data-say="#lc" data-nosay>🔊 Read to me</button></div><div class="cbody">${b}</div></div>`;}
+function lockHead(l,step){const st=LS(l.id);
+ const s=(k,label,ok)=>`<button class="stp ${step===k?"on":ok?"ok":""}" data-act="step" data-k="${k}">${label}</button>`;
+ return `<div class="lockhead"><button class="btn ghost sm" data-act="home">← Locks</button><span class="ic">${l.icon}</span><div><h2>${esc(l.name)}</h2><div class="code">${l.code} · ${esc(l.skill)}</div></div>
+ <div class="steps">${s("learn","📘 Learn It",st.learned)}${s("practice","🎯 Prove It",st.done)}${st.done?s("result","🔑 My Key",true):""}</div></div>`;}
+function learn(l){const st=LS(l.id);const n=l.lesson.length;const ci=Math.min(st.card,n-1);const c=l.lesson[ci];
+ let h=lockHead(l,"learn")+cardHTML(c,l,ci);
+ h+=`<div class="navrow lcard"><button class="btn ghost" data-act="prev" ${ci===0?"disabled":""}>← Back</button><div class="dots">${l.lesson.map((_,i)=>`<span class="dot ${i===ci?"on":i<ci?"g":""}"></span>`).join("")}</div>`;
+ h+=ci<n-1?`<button class="btn" data-act="next">Next →</button>`:`<button class="btn gold" data-act="topractice">I'm ready! Prove It 🎯</button>`;
+ return h+`</div>`;}
+
+/* ---------- PRACTICE ---------- */
+function passageHTML(p){if(!p)return "";const arr=Array.isArray(p)?p:[p];
+ return arr.map(x=>`<h3>${x.title}</h3>${x.by?`<div class="src">${x.by}</div>`:""}<div class="ptext">${x.html}</div>`).join("<hr>");}
+function practice(l){const st=LS(l.id);const qs=l.questions;
+ if(st.q>=qs.length){S.step="result";return result(l);}
+ const qi=st.q,q=qs[qi];const a=st.ans[qi]||(st.ans[qi]={wrong:[],ok:false,hint:false,pts:0,rev:false});
+ const ord=order(l.id+"q"+qi,q.opts.length);
+ const P=q.passage||l.passage;
+ let h=lockHead(l,"practice");
+ h+=`<div class="prac ${P?"":"solo"}">`;
+ if(P)h+=`<div class="card passage" id="psg"><div class="qtop" data-nosay><span class="tag">📖 Read the text</span><button class="say" data-say="#psgt">🔊 Read passage</button></div><div id="psgt">${passageHTML(P)}</div></div>`;
+ h+=`<div class="card" id="qcard"><div class="qtop"><span class="qnum">Question ${qi+1} of ${qs.length}</span><span class="dok dok${q.dok}">DOK ${q.dok} · ${["","Recall","Skill & Concept","Strategic Thinking"][q.dok]}</span>${st.retake?`<span class="tag">Retake · no XP</span>`:""}</div>`;
+ if(q.excerpt)h+=`<div class="excerpt">${q.excerpt}</div>`;
+ h+=`<div class="qtext">${q.q}</div><div class="opts">`;
+ ord.forEach((o,i)=>{let cls="";if((a.ok||a.rev)&&o===0)cls="right";else if(a.wrong.includes(o))cls="wrong";else if(a.ok||a.rev)cls="dim";
+  h+=`<button class="opt ${cls}" data-act="ans" data-o="${o}"><span class="L">${a.wrong.includes(o)?"✖":(a.ok||a.rev)&&o===0?"✔":LET[i]}</span><span>${q.opts[o]}</span></button>`;});
+ h+=`</div>`;
+ if(a.ok||a.rev){
+  h+=`<div class="fb good"><div class="fbrow"><h4>${a.rev?"🔓 Here's the right answer":"✅ "+(a.wrong.length?"You fixed it!":["Correct!","Nailed it!","Yes! Sharp thinking!","Boom! Right on!"][qi%4])}</h4><span class="pts">${st.retake?"":"+"+a.pts+" XP"}</span></div><p><b>Why it's right:</b> ${q.why}</p></div>`;
+  h+=`<div class="navrow"><button class="linkbtn" data-act="step" data-k="learn">📘 Review the lesson</button><button class="btn" data-act="nextq">${qi<qs.length-1?"Next question →":"Finish & get my key 🔑"}</button></div>`;
+ }else{
+  if(a.wrong.length){const last=a.wrong[a.wrong.length-1];const tries=a.wrong.length;
+   h+=`<div class="fb bad"><h4>🔧 Not quite — let's fix the thinking</h4><p>${q.miss&&q.miss[last]?q.miss[last]:"Go back to the text and look for evidence."}</p><p><b>Try again!</b> This try is worth ${[10,5,2,0][Math.min(tries,3)]} XP.</p></div>`;}
+  if(a.hint)h+=`<div class="fb hint"><h4>🔑 Key Clue</h4>${q.hint}</div>`;
+  h+=`<div class="qtools" data-nosay>${a.hint?"":`<button class="hintbtn" data-act="hint">🔑 Key Clue (−3 XP)</button>`}<button class="say" data-act="sayq">🔊 Read question</button><button class="linkbtn" data-act="step" data-k="learn">📘 Review the lesson</button></div>`;
+ }
+ h+=`<div class="navrow"><span></span><div class="dots">${qs.map((_,i)=>{const x=st.ans[i];let c="";if(i===qi)c="on";else if(x&&x.ok&&!x.wrong.length)c="g";else if(x&&x.ok)c="y";else if(x&&x.rev)c="r";return `<span class="dot ${c}"></span>`;}).join("")}</div><span></span></div>`;
+ return h+`</div></div>`;}
+function sayQuestion(l,btn){const st=LS(l.id);const q=l.questions[st.q];const ord=order(l.id+"q"+st.q,q.opts.length);
+ const tmp=document.createElement("div");tmp.innerHTML=(q.excerpt?q.excerpt+" . ":"")+q.q;let t=tmp.textContent+". ";
+ ord.forEach((o,i)=>{const d=document.createElement("div");d.innerHTML=q.opts[o];t+=` Choice ${LET[i]}: ${d.textContent}. `;});TTS.speak(t,btn);}
+function answer(l,o){const st=LS(l.id);const qi=st.q,q=l.questions[qi];const a=st.ans[qi];if(a.ok||a.rev)return;
+ if(o===0){a.ok=true;const base=[10,5,2,0][Math.min(a.wrong.length,3)];a.pts=st.retake?0:Math.max(base-(a.hint&&base>0?3:0),base>0?1:0);
+  sfx("good");
+  if(!st.retake){S.xp+=a.pts;}
+  if(a.wrong.length===0){S.streak++;if(S.streak>S.best)S.best=S.streak;if(q.dok===3&&!st.retake){S.dok3++;if(S.dok3>=5)award("owl");}
+   if(S.streak>=5)award("fire");if(S.streak%3===0&&!st.retake){S.xp+=5;toast(`🔥 ${S.streak} in a row! Streak bonus +5 XP`);}
+   if(S.streak%3!==0&&!st.retake)toast(`⭐ +${a.pts} XP`);}
+  else{if(!st.retake)toast(`⭐ +${a.pts} XP · you fixed your thinking!`);}
+  if(a.wrong.length===0&&S.streak%3===0)confetti(70);
+ }else{a.wrong.push(o);S.streak=0;sfx("bad");
+  if(a.wrong.length>=q.opts.length-1){a.rev=true;a.pts=0;}}
+ save();render();
+ setTimeout(()=>{const f=document.querySelector(".fb");if(f)f.scrollIntoView({behavior:"smooth",block:"nearest"});},60);}
+
+/* ---------- RESULT ---------- */
+function finalize(l){const st=LS(l.id);const qs=l.questions;let first=0;qs.forEach((_,i)=>{const a=st.ans[i];if(a&&a.ok&&a.wrong.length===0)first++;});
+ const pct=first/qs.length;const key=pct>=.8?"gold":pct>=.5?"silver":"bronze";
+ const order3={bronze:1,silver:2,gold:3};
+ const hintUsed=qs.some((_,i)=>st.ans[i]&&st.ans[i].hint);
+ if(!st.done){st.done=true;st.key=key;st.first=first;addXP(20+(key==="gold"?10:0),"Lock unlocked!");}
+ else if(order3[key]>order3[st.key]){st.key=key;st.first=first;toast(`⬆️ Key upgraded to ${key}!`);} else if(first>st.first)st.first=first;
+ st.retake=false;
+ award("first");if(!hintUsed)award("solo");if(first===qs.length)award("flaw");
+ if(T.locks.filter(x=>S.locks[x.id]&&S.locks[x.id].key==="gold").length>=3)award("gold3");
+ st.lastFirst=first;st.lastKey=key;st.lastDok=[1,2,3].map(d=>{const idx=qs.map((q,i)=>i).filter(i=>qs[i].dok===d);return [idx.filter(i=>st.ans[i]&&st.ans[i].ok&&!st.ans[i].wrong.length).length,idx.length];});
+ save();sfx("key");setTimeout(()=>confetti(),150);}
+function result(l){const st=LS(l.id);const qs=l.questions;if(st.lastKey==null){if(st.q>=qs.length)finalize(l);else{st.lastKey=st.key;st.lastFirst=st.first;}}
+ const key=st.lastKey||st.key;const first=st.lastFirst!=null?st.lastFirst:st.first;const msg={gold:"GOLD KEY! You're a master of this skill!",silver:"SILVER KEY! Strong work — a few more first tries and it's gold.",bronze:"BRONZE KEY! You unlocked it. Review the lesson and retake for a shinier key."}[key];
+ const idx=T.locks.findIndex(x=>x.id===l.id);const nxt=T.locks.slice(idx+1).concat(T.locks.slice(0,idx)).find(x=>!(S.locks[x.id]&&S.locks[x.id].done));
+ let h=lockHead(l,"result")+`<div class="card result"><div class="bigkey">${keySVG(key,130)}</div><h2>${l.name} — Unlocked!</h2><p class="big"><b>${msg}</b></p>
+ <div class="rstats"><div class="rstat"><b>${first}/${qs.length}</b><span>right on 1st try</span></div>${(st.lastDok||[]).map((d,i)=>`<div class="rstat"><b>${d[0]}/${d[1]}</b><span>DOK ${i+1} first try</span></div>`).join("")}<div class="rstat"><b>${S.best}</b><span>best streak</span></div><div class="rstat"><b>${S.xp}</b><span>total XP</span></div></div>
+ <div class="callout gold" style="text-align:left"><b>🧠 Remember:</b> ${l.remember}</div>
+ <div class="navrow" style="justify-content:center"><button class="btn ghost" data-act="retake">🔁 Retake for a better key</button>${nxt?`<button class="btn gold" data-act="open" data-id="${nxt.id}">Next lock: ${esc(nxt.name)} →</button>`:`<button class="btn gold" data-act="home">Back to the locks 🏦</button>`}</div></div>`;
+ return h;}
+
+/* ---------- VAULT ---------- */
+function vault(){const d=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+ let h=`<div class="vault"><div class="noprint"><button class="btn ghost sm" data-act="home">← Locks</button></div>${S.vaultOpen?`<div class="opened">🏦✨</div>`:`<div class="door" id="door"><div class="wheel"></div></div>`}`;
+ if(!S.vaultOpen)h+=`<h2 class="fred" style="font-size:30px;color:var(--navy)">The Vault</h2><p>You hold all ${T.locks.length} keys. Spin the wheel!</p><button class="btn gold" data-act="spin">🔓 Spin to open</button>`;
+ else h+=`<div class="cert" id="cert"><div style="font-size:44px">🏆</div><h1>Vault Unlocked!</h1><p>This certifies that</p><div class="nm">${esc(S.name||"A Super Reader")}</div><p>has mastered <b>${esc(T.title)}</b><br>(Florida FAST Grade 6 ELA Reading)</p><div class="keyring">${T.locks.map(l=>`<span title="${esc(l.name)}">${keySVG(S.locks[l.id].key,46)}</span>`).join("")}</div><p><b>${S.xp} XP</b> · Level: <b>${level().name}</b> · ${S.badges.length} badges</p><p style="color:var(--muted)">${d}</p><p class="noprint"><button class="btn" data-act="print">🖨️ Print certificate</button> <button class="btn ghost" data-act="home">Back to the locks</button></p></div>`;
+ return h+`</div>`;}
+
+/* ---------- render + events ---------- */
+function render(){TTS.stop();let body="";
+ if(S.view==="home")body=home();
+ else if(S.view==="vault")body=vault();
+ else{const l=lockById(S.lock);if(!l){S.view="home";return render();}
+  const st=LS(l.id);const canResult=st.done&&(st.q>=l.questions.length||!st.retake);
+  body=S.step==="practice"?((st.retake||!st.done||st.q<l.questions.length)?practice(l):result(l)):S.step==="result"?(canResult?result(l):practice(l)):learn(l);}
+ app.innerHTML=topbar()+`<main><div class="wrap">${body}</div></main>`+footer();}
+function go(fn){fn();save();render();window.scrollTo(0,0);}
+app.addEventListener("click",e=>{
+ const sw=e.target.closest("[data-speak]");if(sw){TTS.speak(sw.dataset.speak,sw);return;}
+ const sb=e.target.closest("[data-say]");if(sb){const el=document.querySelector(sb.dataset.say);if(el)TTS.speak(textOf(el),sb);return;}
+ const b=e.target.closest("[data-act]");if(!b)return;const act=b.dataset.act;const l=S.lock?lockById(S.lock):null;
+ switch(act){
+  case "name":{const v=($("#nm").value||"").trim();if(!v){$("#nm").focus();return;}S.name=v.slice(0,24);sfx("good");save();render();toast(`👋 Hi, ${esc(S.name)}! Pick a lock to begin.`);break;}
+  case "open":go(()=>{S.view="lock";S.lock=b.dataset.id;const st=LS(S.lock);S.step=st.retake?"practice":st.done?"result":st.learned&&st.q>0?"practice":"learn";});sfx("tap");break;
+  case "home":go(()=>{S.view="home";});break;
+  case "step":{const k=b.dataset.k;const st=LS(l.id);if(k==="result"&&!st.done)return;go(()=>{S.step=k;if(k==="practice"&&st.done&&st.q>=l.questions.length)S.step="result";});break;}
+  case "next":go(()=>{const st=LS(l.id);st.card=Math.min(st.card+1,l.lesson.length-1);});sfx("tap");break;
+  case "prev":go(()=>{const st=LS(l.id);st.card=Math.max(st.card-1,0);});break;
+  case "topractice":go(()=>{const st=LS(l.id);if(!st.learned){st.learned=true;addXP(15,"Lesson complete!");if(T.locks.every(x=>S.locks[x.id]&&S.locks[x.id].learned))award("books");}S.step=st.done&&st.q>=l.questions.length?"result":"practice";});break;
+  case "flip":b.classList.toggle("open");sfx("tap");break;
+  case "tc":{const ci=+b.dataset.ci,o=+b.dataset.o;const st=LS(l.id);const c=l.lesson[ci];const s=st.tc[ci]||(st.tc[ci]={wrong:[],ok:false});if(s.ok)return;
+   if(o===0){s.ok=true;sfx("good");if(!s.wrong.length){addXP(5,"Quick Check");}}else{s.wrong.push(o);sfx("bad");}save();render();break;}
+  case "ans":answer(l,+b.dataset.o);break;
+  case "hint":{const st=LS(l.id);const a=st.ans[st.q];a.hint=true;st.noHint=false;save();render();break;}
+  case "sayq":sayQuestion(l,b);break;
+  case "nextq":go(()=>{const st=LS(l.id);st.q++;if(st.q>=l.questions.length){st.lastKey=null;st.lastFirst=null;S.step="result";finalize(l);}});break;
+  case "retake":go(()=>{const st=LS(l.id);st.q=0;st.ans={};st.retake=true;st.lastKey=null;st.lastFirst=null;S.step="practice";});toast("🔁 Retake: no XP this time, but you can upgrade your key!");break;
+  case "vault":go(()=>{S.view="vault";});break;
+  case "spin":{const d=$("#door");d.classList.add("open");sfx("key");setTimeout(()=>{S.vaultOpen=true;award("vault");save();render();confetti(260);setTimeout(()=>confetti(200),900);},1400);break;}
+  case "print":window.print();break;
+  case "sound":S.sound=!S.sound;save();render();sfx("tap");break;
+  case "slow":S.slow=!S.slow;save();render();break;
+  case "reset":if(confirm("Erase ALL progress for this tutorial on this device?")&&confirm("Are you sure? This cannot be undone.")){try{localStorage.removeItem(KEY);}catch(e){}S=fresh();render();}break;
+ }});
+app.addEventListener("keydown",e=>{if(e.target.id==="nm"&&e.key==="Enter"){const btn=document.querySelector('[data-act="name"]');if(btn)btn.click();}});
+window.addEventListener("pagehide",save);
+render();
+})();
+
+</script>
+</body>
+</html>
